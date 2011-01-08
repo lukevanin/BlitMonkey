@@ -1,6 +1,6 @@
 package engine.graphics.factories 
 {
-	import engine.config.interfaces.ICanvasConfigCollection;
+	import engine.config.interfaces.IConfigProvider;
 	import engine.graphics.facades.CanvasFacade;
 	import engine.graphics.interfaces.ICanvas;
 	import engine.graphics.interfaces.ICanvasConfig;
@@ -14,10 +14,10 @@ package engine.graphics.factories
 	public class CanvasFactory implements ICanvasFactory
 	{
 		
-		private var _config:ICanvasConfigCollection;
+		private var _config:IConfigProvider;
 		
 		
-		public function CanvasFactory(config:ICanvasConfigCollection) 
+		public function CanvasFactory(config:IConfigProvider) 
 		{
 			this._config = config;
 		}
@@ -25,7 +25,7 @@ package engine.graphics.factories
 
 		public function createCanvas(id:String):ICanvas 
 		{
-			var config:ICanvasConfig = this._config.getCanvas(id);
+			var config:ICanvasConfig = this._config.getConfig(id) as ICanvasConfig;
 			
 			var model:CanvasModel = CanvasModel.create(config.isTransparent, config.backgroundColour);
 			
@@ -42,10 +42,10 @@ package engine.graphics.factories
 		
 		
 		
-		public static function create(config:ICanvasConfigCollection):CanvasFactory
+		/*public static function create(config:ICanvasConfigCollection):CanvasFactory
 		{
 			return new CanvasFactory(config);
-		}
+		}*/
 		
 	}
 

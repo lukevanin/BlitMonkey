@@ -14,7 +14,7 @@ package engine.graphics.models
 
 		private var _duration:Number;
 		
-		private var _cell:int;
+		//private var _cell:int;
 		
 		
 		
@@ -26,19 +26,20 @@ package engine.graphics.models
 		
 		
 		
-		public function get cell():int
+		/*public function get cell():int
 		{
 			return this._cell;
-		}
+		}*/
 		
 		
 		
 		
-		public function AnimationFrameModel(duration:Number, cell:int) 
+		//public function AnimationFrameModel(duration:Number, cell:int) 
+		public function AnimationFrameModel(duration:Number) 
 		{
 			this._duration = duration;
 			
-			this._cell = cell;
+			//this._cell = cell;
 		}
 		
 

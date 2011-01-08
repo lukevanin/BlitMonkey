@@ -13,7 +13,7 @@ package engine.graphics.interfaces
 		function get duration():Number;
 		
 		
-		function get cell():int;
+		//function get cell():int;
 		
 	}
 	

@@ -11,8 +11,6 @@ package engine.config.interfaces
 		function get duration():Number;
 	
 		
-		function get cell():int;
-		
 	}
 	
 }

@@ -50,9 +50,19 @@ package engine.config.models
 		}
 		
 		
-		public function CanvasConfigModel() 
+		
+		
+		public function CanvasConfigModel(area:Rectangle, pixelSnapping:String, smoothing:Boolean, isTransparent:Boolean, backgroundColour:uint) 
 		{
+			this._area = area;
 			
+			this._pixelSnapping = pixelSnapping;
+			
+			this._smoothing = smoothing;
+			
+			this._isTransparent = isTransparent;
+			
+			this._backgroundColour = backgroundColour;
 		}
 		
 		
@@ -63,7 +73,7 @@ package engine.config.models
 		 * 
 		 * @param	xml
 		 */
-		public function parseXml(xml:XML):void
+		/*public function parseXml(xml:XML):void
 		{
 			this._area = StringUtil.stringToRectangle(xml.@area.toString());
 			
@@ -91,18 +101,18 @@ package engine.config.models
 			else
 				this._backgroundColour = 0x00000000;
 		
-		}
+		}*/
 		
 		
 		
-		public static function create(xml:XML):CanvasConfigModel
+		/*public static function create(xml:XML):CanvasConfigModel
 		{
 			var config:CanvasConfigModel = new CanvasConfigModel();
 			
 			config.parseXml(xml);
 			
 			return config;
-		}
+		}*/
 		
 		
 	}

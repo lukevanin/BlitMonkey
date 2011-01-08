@@ -38,10 +38,10 @@ package engine.graphics.providers
 		
 		
 		
-		public static function create(animationFactory:IAnimationFactory):AnimationProvider
+		/*public static function create(animationFactory:IAnimationFactory):AnimationProvider
 		{
 			return new AnimationProvider(animationFactory);
-		}
+		}*/
 		
 	}
 

@@ -2,7 +2,7 @@ package engine.graphics.factories
 {
 
 	import engine.config.interfaces.ICellsConfig;
-	import engine.config.interfaces.ICellsConfigCollection;
+	import engine.config.interfaces.IConfigProvider;
 	import engine.graphics.interfaces.IBitmapProvider;
 	import engine.graphics.interfaces.ICell;
 	import engine.graphics.interfaces.ICellFactory;
@@ -17,14 +17,14 @@ package engine.graphics.factories
 	public class CellsFactory implements ICellsFactory
 	{
 		
-		private var _config:ICellsConfigCollection;
+		private var _config:IConfigProvider;
 		
 		private var _cellFactory:ICellFactory;
 		
 		private var _bitmapProvider:IBitmapProvider;
 		
 		
-		public function CellsFactory(config:ICellsConfigCollection, cellFactory:ICellFactory, bitmapProvider:IBitmapProvider) 
+		public function CellsFactory(config:IConfigProvider, cellFactory:ICellFactory, bitmapProvider:IBitmapProvider) 
 		{
 			this._config = config;
 			
@@ -36,7 +36,7 @@ package engine.graphics.factories
 
 		public function createCells(id:String):ICells 
 		{
-			var config:ICellsConfig = this._config.getCells(id);
+			var config:ICellsConfig = this._config.getConfig(id) as ICellsConfig;
 			
 			var bitmap:BitmapData = this._bitmapProvider.getBitmap(id);
 			
@@ -50,10 +50,10 @@ package engine.graphics.factories
 		
 		
 		
-		public static function create(config:ICellsConfigCollection, cellFactory:ICellFactory, bitmapProvider:IBitmapProvider):CellsFactory
+		/*public static function create(config:ICellsConfigCollection, cellFactory:ICellFactory, bitmapProvider:IBitmapProvider):CellsFactory
 		{
 			return new CellsFactory(config, cellFactory, bitmapProvider);
-		}
+		}*/
 		
 
 		

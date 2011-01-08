@@ -6,11 +6,13 @@ package engine.config.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IConfigFactory 
+	public interface IXmlConfigFactory 
 	{
+		
+		function createConfig(xml:XML):Object;
 
 		
-		function createGameConfig(xml:XML):IGameConfig;
+		/*function createGameConfig(xml:XML):IGameConfig;
 		
 		
 		function createLibraryConfig(xml:XML):ILibraryConfig; 
@@ -31,7 +33,7 @@ package engine.config.interfaces
 		function createAnimationConfig(xml:XML):IAnimationConfig;
 		
 		
-		function createAnimationFrameConfig(xml:XML):IAnimationFrameConfig;
+		function createAnimationFrameConfig(xml:XML):IAnimationFrameConfig;*/
 		
 		
 		

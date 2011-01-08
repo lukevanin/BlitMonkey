@@ -40,10 +40,10 @@ package engine.graphics.providers
 		
 		
 		
-		public static function create(canvasFactory:ICanvasFactory):CanvasProvider
+		/*public static function create(canvasFactory:ICanvasFactory):CanvasProvider
 		{
 			return new CanvasProvider(canvasFactory);
-		}
+		}*/
 	}
 
 }

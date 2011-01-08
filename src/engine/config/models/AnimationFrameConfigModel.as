@@ -11,7 +11,7 @@ package engine.config.models
 		
 		private var _duration:Number;
 		
-		private var _cell:int;
+		//private var _cell:int;
 		
 
 		public function get duration():Number 
@@ -19,15 +19,15 @@ package engine.config.models
 			return this._duration;
 		}
 		
-		public function get cell():int 
+		/*public function get cell():int 
 		{
 			return this._cell;
-		}
+		}*/
 		
 		
-		public function AnimationFrameConfigModel() 
+		public function AnimationFrameConfigModel(duration:Number) 
 		{
-			
+			this._duration = duration;
 		}
 		
 		
@@ -41,16 +41,16 @@ package engine.config.models
 		 * 
 		 * @param	xml
 		 */
-		public function parseXml(xml:XML):void
+		/*public function parseXml(xml:XML):void
 		{
 			this._duration = this.parseTime(xml.@duration.toString());
 			
 			this._cell = parseInt(xml.@cell.toString());
-		}
+		}*/
 		
 		
 		
-		private function parseTime(s:String, delimiter:String = "/"):Number
+		/*private function parseTime(s:String, delimiter:String = "/"):Number
 		{
 			if (s.indexOf(delimiter) == -1)
 			{
@@ -68,18 +68,18 @@ package engine.config.models
 				
 				return a / b;
 			}
-		}
+		}*/
 		
 		
 		
-		public static function create(xml:XML):AnimationFrameConfigModel
+		/*public static function create(xml:XML):AnimationFrameConfigModel
 		{
 			var config:AnimationFrameConfigModel = new AnimationFrameConfigModel();
 			
 			config.parseXml(xml);
 			
 			return config;
-		}
+		}*/
 		
 		
 		

@@ -29,9 +29,13 @@ package engine.config.models
 		}
 		
 		
-		public function CellConfigModel() 
+		
+		
+		public function CellConfigModel(area:Rectangle, offset:Point) 
 		{
+			this._area = area;
 			
+			this._offset = offset;
 		}
 		
 		
@@ -42,23 +46,23 @@ package engine.config.models
 		 * 
 		 * @param	xml
 		 */
-		public function parseXml(xml:XML):void
+		/*public function parseXml(xml:XML):void
 		{
 			this._area = StringUtil.stringToRectangle(xml.@area.toString());
 			
 			this._offset = StringUtil.stringToPoint(xml.@area.toString());
-		}
+		}*/
 		
 		
 		
-		public static function create(xml:XML):CellConfigModel
+		/*public static function create(xml:XML):CellConfigModel
 		{
 			var config:CellConfigModel = new CellConfigModel();
 			
 			config.parseXml(xml);
 			
 			return config;
-		}
+		}*/
 		
 
 		

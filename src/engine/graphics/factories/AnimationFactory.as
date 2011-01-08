@@ -1,10 +1,13 @@
 package engine.graphics.factories 
 {
 	import engine.config.interfaces.IAnimationConfig;
-	import engine.config.interfaces.IAnimationConfigCollection;
+	import engine.config.interfaces.ICellsAnimationConfig;
+	import engine.config.interfaces.IConfigProvider;
+	import engine.config.interfaces.IGameConfig;
 	import engine.config.models.AnimationConfigModel;
 	import engine.graphics.controllers.AnimationController;
 	import engine.graphics.facades.AnimationFacade;
+	import engine.graphics.facades.CellsAnimationFacade;
 	import engine.graphics.interfaces.IAnimation;
 	import engine.graphics.interfaces.IAnimationController;
 	import engine.graphics.interfaces.IAnimationFactory;
@@ -21,14 +24,14 @@ package engine.graphics.factories
 	public class AnimationFactory implements IAnimationFactory 
 	{
 		
-		private var _config:IAnimationConfigCollection;
+		private var _config:IGameConfig;
 		
 		private var _frameFactory:IAnimationFrameFactory;
 		
 		private var _cellsProvider:ICellsProvider;
 		
 		
-		public function AnimationFactory(config:IAnimationConfigCollection, frameFactory:IAnimationFrameFactory, cellsProvider:ICellsProvider) 
+		public function AnimationFactory(config:IGameConfig, frameFactory:IAnimationFrameFactory, cellsProvider:ICellsProvider) 
 		{
 			this._config = config;
 			
@@ -43,7 +46,7 @@ package engine.graphics.factories
 
 		public function createAnimation(id:String):IAnimation 
 		{
-			var config:IAnimationConfig = this._config.getAnimation(id);
+			var config:IAnimationConfig = this._config.getConfig(IAnimationConfig).getConfig(id) as IAnimationConfig;
 			
 
 			var model:IAnimationModel = new AnimationModel(new Vector.<IAnimationFrame>());
@@ -61,10 +64,10 @@ package engine.graphics.factories
 		
 		
 		
-		public static function create(config:IAnimationConfigCollection, frameFactory:IAnimationFrameFactory, cellsProvider:ICellsProvider):AnimationFactory
+		/*public static function create(config:IAnimationConfigCollection, frameFactory:IAnimationFrameFactory, cellsProvider:ICellsProvider):AnimationFactory
 		{
 			return new AnimationFactory(config, frameFactory, cellsProvider);
-		}
+		}*/
 		
 	}
 

@@ -39,10 +39,10 @@ package engine.framework.providers
 		}
 		
 		
-		public static function create(bitmapFactory:IBitmapFactory):BitmapProvider
+		/*public static function create(bitmapFactory:IBitmapFactory):BitmapProvider
 		{
 			return new BitmapProvider(bitmapFactory);
-		}
+		}*/
 		
 	}
 

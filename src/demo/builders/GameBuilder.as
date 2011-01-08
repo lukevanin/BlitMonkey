@@ -2,8 +2,14 @@ package demo.builders
 {
 	import demo.facades.GameFacade;
 	import demo.libraries.GameLib;
-	import engine.config.factories.XmlConfigFactory;
+	import engine.config.enums.XmlConfigEnum;
+	import engine.config.factories.XmlGameConfigFactory;
+	import engine.config.interfaces.IAnimationConfig;
+	import engine.config.interfaces.IBitmapConfig;
+	import engine.config.interfaces.ICellsConfig;
 	import engine.config.interfaces.IGameConfig;
+	import engine.config.interfaces.ILibraryConfig;
+	import engine.config.providers.XmlFactoryTypeProvider;
 	import engine.framework.factories.AssetFactory;
 	import engine.framework.factories.BitmapFactory;
 	import engine.framework.factories.LibraryFactory;
@@ -27,6 +33,7 @@ package demo.builders
 	import engine.graphics.interfaces.IAnimationProvider;
 	import engine.graphics.interfaces.IBitmapProvider;
 	import engine.graphics.interfaces.ICanvas;
+	import engine.graphics.interfaces.ICanvasConfig;
 	import engine.graphics.interfaces.ICanvasFactory;
 	import engine.graphics.interfaces.ICanvasProvider;
 	import engine.graphics.interfaces.ICanvasRenderer;
@@ -73,52 +80,53 @@ package demo.builders
 
 		public function buildGame():IGame 
 		{
-			var config:IGameConfig = XmlConfigFactory.create().createGameConfig(this._configXml); 
+			var config:IGameConfig = new XmlGameConfigFactory(XmlFactoryTypeProvider.create()).createConfig(this._configXml) as IGameConfig; 
+			
 			
 			//var librariesFactory:ILibrariesFactory = LibrariesFactory.create(LibraryFactory.create());
 			
-			var libraryFactory:ILibraryFactory = LibraryFactory.create(config);
+			var libraryFactory:ILibraryFactory = new LibraryFactory(config.getConfig(ILibraryConfig));
 			
-			var libraryProvider:ILibraryProvider = LibraryProvider.create(libraryFactory);
+			var libraryProvider:ILibraryProvider = new LibraryProvider(libraryFactory);
 			
-			var assetFactory:IAssetFactory = AssetFactory.create(libraryProvider);
+			var assetFactory:IAssetFactory = new AssetFactory(libraryProvider);
 
 			
-			var canvasFactory:ICanvasFactory = CanvasFactory.create(config);
+			var canvasFactory:ICanvasFactory = new CanvasFactory(config.getConfig(ICanvasConfig));
 			
-			var canvasProvider:ICanvasProvider = CanvasProvider.create(canvasFactory);
-			
-			
-			var bitmapFactory:IBitmapFactory = BitmapFactory.create(config, assetFactory);
-			
-			var bitmapProvider:IBitmapProvider = BitmapProvider.create(bitmapFactory);
+			var canvasProvider:ICanvasProvider = new CanvasProvider(canvasFactory);
 			
 			
-			var cellsFactory:ICellsFactory = CellsFactory.create(config, CellFactory.create(), bitmapProvider);
+			var bitmapFactory:IBitmapFactory = new BitmapFactory(config.getConfig(IBitmapConfig), assetFactory);
 			
-			var cellsProvider:ICellsProvider = CellsProvider.create(cellsFactory);
-			
-			
-			var animationFactory:IAnimationFactory = AnimationFactory.create(config, AnimationFrameFactory.create(), cellsProvider);
-			
-			var animationProvider:IAnimationProvider = AnimationProvider.create(animationFactory);
+			var bitmapProvider:IBitmapProvider = new BitmapProvider(bitmapFactory);
 			
 			
-			var componentProvider:IComponentProvider = ComponentProvider.create(canvasProvider, bitmapProvider, animationProvider);
+			var cellsFactory:ICellsFactory = new CellsFactory(config.getConfig(ICellsConfig), CellFactory.create(), bitmapProvider);
+			
+			var cellsProvider:ICellsProvider = new CellsProvider(cellsFactory);
+			
+			
+			var animationFactory:IAnimationFactory = new AnimationFactory(config.getConfig(IAnimationConfig), new AnimationFrameFactory(), cellsProvider);
+			
+			var animationProvider:IAnimationProvider = new AnimationProvider(animationFactory);
+			
+			
+			var componentProvider:IComponentProvider = new ComponentProvider(canvasProvider, bitmapProvider, animationProvider);
 			
 			
 			//var cells:ICells = gameFactory.createCells("abuCells");
 		
 			var canvas:ICanvas = componentProvider.getCanvas("stageCanvas");
 			
-			var canvasRenderer:ICanvasRenderer = CanvasRenderer.create(canvas);
+			//var canvasRenderer:ICanvasRenderer = CanvasRenderer.create(canvas);
 			
 			var animation:IAnimation = componentProvider.getAnimation("abuIdleAnimation");
 			
 			//cells.getCellAt(0).render(canvas, new Point(50, 50));
 			
-			if (animation is IDrawable)
-				(animation as IDrawable).draw(canvasRenderer, new Point(50, 50));
+			//if (animation is IDrawable)
+				//(animation as IDrawable).draw(canvasRenderer, new Point(50, 50));
 
 				
 			/*

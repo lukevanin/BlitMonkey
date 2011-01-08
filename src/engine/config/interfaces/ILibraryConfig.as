@@ -8,7 +8,7 @@ package engine.config.interfaces
 	public interface ILibraryConfig 
 	{
 		
-		
+		//function get id():String;
 		
 	}
 	

@@ -78,11 +78,11 @@ package engine.framework.providers
 		
 		
 		//public static function create(canvasProvider:ICanvasProvider, bitmapProvider:IBitmapProvider, cellsProvider:ICellsProvider, animationProvider:IAnimationProvider):IComponentProvider
-		public static function create(canvasProvider:ICanvasProvider, bitmapProvider:IBitmapProvider, animationProvider:IAnimationProvider):IComponentProvider
+		/*public static function create(canvasProvider:ICanvasProvider, bitmapProvider:IBitmapProvider, animationProvider:IAnimationProvider):IComponentProvider
 		{
 			//return new ComponentProvider(canvasProvider, bitmapProvider, cellsProvider, animationProvider);
 			return new ComponentProvider(canvasProvider, bitmapProvider, animationProvider);
-		}
+		}*/
 
 		
 	}

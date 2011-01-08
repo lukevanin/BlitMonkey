@@ -1,6 +1,7 @@
 package engine.framework.factories 
 {
-	import engine.config.interfaces.IBitmapConfigCollection;
+	import engine.config.interfaces.IBitmapConfig;
+	import engine.config.interfaces.IConfigProvider;
 	import engine.config.interfaces.IGameConfig;
 	import engine.framework.interfaces.IBitmapFactory;
 	import engine.framework.interfaces.IAssetFactory;
@@ -13,13 +14,13 @@ package engine.framework.factories
 	public class BitmapFactory implements IBitmapFactory
 	{
 		
-		private var _config:IBitmapConfigCollection;
+		private var _config:IConfigProvider;
 		
 		private var _assetFactory:IAssetFactory;
 		
 		
 		
-		public function BitmapFactory(config:IBitmapConfigCollection, assetFactory:IAssetFactory) 
+		public function BitmapFactory(config:IConfigProvider, assetFactory:IAssetFactory) 
 		{
 			this._config = config;
 			
@@ -32,15 +33,17 @@ package engine.framework.factories
 		
 		public function createBitmap(id:String):BitmapData
 		{
-			return (this._assetFactory.createObject(this._config.getBitmap(id).asset) as Bitmap).bitmapData;
+			var config:IBitmapConfig = this._config.getConfig(id) as IBitmapConfig;
+			
+			return (this._assetFactory.createObject(config.asset) as Bitmap).bitmapData;
 		}		
 		
 		
 		
-		public static function create(config:IBitmapConfigCollection, assetFactory:IAssetFactory):BitmapFactory 
+		/*public static function create(config:IBitmapConfigCollection, assetFactory:IAssetFactory):BitmapFactory 
 		{
 			return  new BitmapFactory(config, assetFactory);
-		}
+		}*/
 		
 		
 	}

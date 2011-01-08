@@ -48,10 +48,10 @@ package engine.framework.factories
 
 		
 		
-		public static function create(libraryProvider:ILibraryProvider, pathDelimiter:String = "."):AssetFactory
+		/*public static function create(libraryProvider:ILibraryProvider, pathDelimiter:String = "."):AssetFactory
 		{
 			return new AssetFactory(libraryProvider, pathDelimiter);
-		}
+		}*/
 
 		
 	}

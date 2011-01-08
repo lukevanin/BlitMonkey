@@ -2,8 +2,8 @@ package engine.framework.factories
 {
 	import adobe.utils.CustomActions;
 	import engine.config.interfaces.IClassLibraryConfig;
+	import engine.config.interfaces.IConfigProvider;
 	import engine.config.interfaces.ILibraryConfig;
-	import engine.config.interfaces.ILibraryConfigCollection;
 	import engine.framework.adapters.ApplicationDomainGameLibraryAdapter;
 	import engine.framework.adapters.ClassGameLibraryAdapter;
 	import flash.display.MovieClip;
@@ -20,11 +20,11 @@ package engine.framework.factories
 	public class LibraryFactory implements ILibraryFactory 
 	{
 		
-		private var _config:ILibraryConfigCollection;
+		private var _config:IConfigProvider;
 		
 		
 		
-		public function LibraryFactory(config:ILibraryConfigCollection) 
+		public function LibraryFactory(config:IConfigProvider) 
 		{
 			this._config = config;
 		}
@@ -34,7 +34,7 @@ package engine.framework.factories
 		
 		public function createLibrary(id:String):ILibrary
 		{
-			var config:ILibraryConfig = this._config.getLibrary(id);
+			var config:ILibraryConfig = this._config.getConfig(id) as ILibraryConfig;
 			
 			if (config is IClassLibraryConfig)
 				return this.createClassLibrary(config as IClassLibraryConfig)
@@ -66,10 +66,10 @@ package engine.framework.factories
 		
 		
 		
-		public static function create(config:ILibraryConfigCollection):LibraryFactory
+		/*public static function create(config:ILibraryConfigCollection):LibraryFactory
 		{
 			return new LibraryFactory(config);
-		}
+		}*/
 		
 	}
 

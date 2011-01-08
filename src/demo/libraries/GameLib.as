@@ -16,11 +16,6 @@ package demo.libraries
 		public static const ABU:Class;
 		
 		
-		[Embed(source='../../../assets/aladdin sprites/AladdinTown.png')]
-		public static const BACKGROUND:Class;
-		
-	
-		
 	}
 
 }

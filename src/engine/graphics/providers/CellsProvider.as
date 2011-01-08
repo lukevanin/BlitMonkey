@@ -36,10 +36,10 @@ package engine.graphics.providers
 		
 		
 		
-		public static function create(cellsFactory:ICellsFactory):CellsProvider
+		/*public static function create(cellsFactory:ICellsFactory):CellsProvider
 		{
 			return new CellsProvider(cellsFactory);
-		}
+		}*/
 		
 	}
 

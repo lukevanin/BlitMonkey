@@ -45,7 +45,7 @@ package engine.collection
 			
 			this._numItems = 0;
 			
-			for (var k:String in dictionary)
+			for (var k:* in dictionary)
 			{
 				this._keys[this._numItems] = k;
 				
@@ -53,6 +53,8 @@ package engine.collection
 				
 				this._numItems ++;
 			}
+			
+			this.reset();
 		}
 		
 

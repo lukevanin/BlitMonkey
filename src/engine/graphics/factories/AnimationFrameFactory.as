@@ -1,6 +1,9 @@
 package engine.graphics.factories 
 {
 	import engine.config.interfaces.IAnimationFrameConfig;
+	import engine.config.interfaces.ICellAnimationFrame;
+	import engine.config.interfaces.ICellAnimationFrameConfig;
+	import engine.config.models.CellAnimationFrameModel;
 	import engine.graphics.interfaces.IAnimationFrame;
 	import engine.graphics.interfaces.IAnimationFrameFactory;
 	import engine.graphics.interfaces.ICell;
@@ -21,14 +24,27 @@ package engine.graphics.factories
 
 		public function createAnimationFrame(config:IAnimationFrameConfig):IAnimationFrame 
 		{
-			return new AnimationFrameModel(config.duration, config.cell);
+			if (config is ICellAnimationFrameConfig)
+				return this.createCellAnimationFrame(config as ICellAnimationFrameConfig);
+			else
+				throw new Error("Unsupported frame type " + config);
+				
+			//return new AnimationFrameModel(config.duration, config.cell);
 		}
 		
 		
-		public static function create():AnimationFrameFactory
+		
+		
+		private function createCellAnimationFrame(config:ICellAnimationFrameConfig):ICellAnimationFrame
+		{
+			return new CellAnimationFrameModel(config.cell, new AnimationFrameModel(config.duration))
+		}
+		
+		
+		/*public static function create():AnimationFrameFactory
 		{
 			return new AnimationFrameFactory();
-		}
+		}*/
 		
 	}
 

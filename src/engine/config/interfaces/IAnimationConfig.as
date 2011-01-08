@@ -8,9 +8,9 @@ package engine.config.interfaces
 	public interface IAnimationConfig 
 	{
 		
-		function get cells():String;
-		
 		function get numFrames():int;
+		
+		//function addFrame(frame:IAnimationFrameConfig):void;
 		
 		function getFrameAt(index:int):IAnimationFrameConfig;
 		

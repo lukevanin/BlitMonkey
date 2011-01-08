@@ -5,7 +5,6 @@ package engine.framework.providers
 	import engine.collection.interfaces.IIterator;
 	import engine.collection.interfaces.ISafeDictionary;
 	import engine.collection.SafeDictionary;
-	import engine.config.interfaces.ILibraryConfigCollection;
 	import engine.config.interfaces.ILibraryConfig;
 	import engine.framework.interfaces.ILibraries;
 	import engine.framework.interfaces.ILibrary;
@@ -64,10 +63,10 @@ package engine.framework.providers
 		
 		
 		
-		public static function create(libraryFactory:ILibraryFactory):LibraryProvider
+		/*public static function create(libraryFactory:ILibraryFactory):LibraryProvider
 		{
 			return new LibraryProvider(libraryFactory);
-		}
+		}*/
 		
 
 		

@@ -2,7 +2,8 @@ package engine.config.models
 {
 	import engine.config.interfaces.ICellConfig;
 	import engine.config.interfaces.ICellsConfig;
-	import engine.config.interfaces.IConfigFactory;
+	import engine.config.interfaces.IXmlConfigFactory;
+	import engine.graphics.interfaces.ICell;
 	/**
 	 * ...
 	 * @author Luke Van In
@@ -29,8 +30,11 @@ package engine.config.models
 		}
 		
 		
-		public function CellsConfigModel() 
+		public function CellsConfigModel(bitmap:String, cells:Vector.<ICellConfig>) 
 		{
+			this._bitmap = bitmap;
+			
+			this._cells = cells;
 		}
 		
 		
@@ -52,34 +56,34 @@ package engine.config.models
 		 * 
 		 * @param	xml
 		 */
-		public function parseXml(xml:XML, factory:IConfigFactory):void
+		/*public function parseXml(xml:XML, factory:IXmlConfigFactory):void
 		{
 			this._bitmap = xml.@bitmap.toString();
 			
 			this.parseCellsXml(xml, factory);
-		}
+		}*/
 		
-		
-		private function parseCellsXml(xml:XML, factory:IConfigFactory):void
+		/*
+		private function parseCellsXml(xml:XML, factory:IXmlConfigFactory):void
 		{
 			this._cells = new Vector.<ICellConfig>();
 			
 			for each (var cellXml:XML in xml.cell)
-				this._cells.push(factory.createCellConfig(cellXml));
-		}
+				this._cells.push(factory.createConfig(cellXml));
+		}*/
 		
 		
 		
 		
 		
-		public static function create(xml:XML, factory:IConfigFactory):CellsConfigModel
+	/*	public static function create(xml:XML, factory:IXmlConfigFactory):CellsConfigModel
 		{
 			var config:CellsConfigModel = new CellsConfigModel();
 			
 			config.parseXml(xml, factory);
 			
 			return config;
-		}
+		}*/
 		
 		
 	}

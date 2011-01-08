@@ -6,10 +6,12 @@ package engine.config.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IBitmapConfigCollection
+	public interface IConfigProvider 
 	{
 		
-		function getBitmap(id:String):IBitmapConfig;
+		function getConfig(id:String):Object;
+		
+		function getIterator():IIterator;
 		
 	}
 	

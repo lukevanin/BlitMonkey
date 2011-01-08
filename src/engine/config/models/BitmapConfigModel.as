@@ -1,7 +1,7 @@
 package engine.config.models 
 {
 	import engine.config.interfaces.IBitmapConfig;
-	import engine.config.interfaces.IConfigFactory;
+	import engine.config.interfaces.IXmlConfigFactory;
 	/**
 	 * ...
 	 * @author Luke Van In
@@ -20,9 +20,9 @@ package engine.config.models
 		
 		
 		
-		public function BitmapConfigModel() 
+		public function BitmapConfigModel(asset:String) 
 		{
-
+			this._asset = asset;
 		}
 		
 		
@@ -32,21 +32,21 @@ package engine.config.models
 		 * 
 		 * @param	xml
 		 */
-		public function parseXml(xml:XML):void
+		/*public function parseXml(xml:XML):void
 		{
 			this._asset = xml.@asset.toString();
-		}
+		}*/
 		
 		
 		
-		public static function create(xml:XML):BitmapConfigModel
+		/*public static function create(xml:XML):BitmapConfigModel
 		{
 			var config:BitmapConfigModel = new BitmapConfigModel();
 			
 			config.parseXml(xml);
 			
 			return config;
-		}
+		}*/
 		
 	}
 
