@@ -2,6 +2,7 @@ package engine.graphics.facades
 {
 	import engine.graphics.interfaces.IAnimation;
 	import engine.graphics.interfaces.IAnimationController;
+	import engine.graphics.interfaces.IAnimationFrame;
 	import engine.graphics.interfaces.IAnimationModel;
 	/**
 	 * ...
@@ -38,10 +39,19 @@ package engine.graphics.facades
 		
 
 		
+		public function getFrameAt(index:int):IAnimationFrame 
+		{
+			return this._model.getFrameAt(index);
+		}
+		
+		
 		public function update(time:Number):void 
 		{
 			this._controller.update(time);
 		}
+		
+
+
 		
 	}
 

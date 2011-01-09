@@ -1,14 +1,15 @@
 package engine.graphics.interfaces 
 {
+	import engine.framework.interfaces.ITimeline;
 	
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IAnimationController
+	public interface IAnimationController extends ITimeline 
 	{
 
-		function update(time:Number):void;
+		
 		
 		
 		//function play(repeat:int = 0):void;

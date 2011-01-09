@@ -1,58 +1,56 @@
 package demo.builders 
 {
 	import demo.facades.GameFacade;
-	import demo.libraries.GameLib;
-	import engine.config.enums.XmlConfigEnum;
-	import engine.config.factories.XmlGameConfigFactory;
-	import engine.config.interfaces.IAnimationConfig;
-	import engine.config.interfaces.IBitmapConfig;
-	import engine.config.interfaces.ICellsConfig;
-	import engine.config.interfaces.IGameConfig;
-	import engine.config.interfaces.ILibraryConfig;
-	import engine.config.providers.XmlFactoryTypeProvider;
+	import engine.collection.interfaces.IDictionary;
+	import engine.collection.Dictionary;
+	import engine.framework.builders.ClassLibraryBuilder;
+	import engine.framework.enums.LibraryTypeEnum;
 	import engine.framework.factories.AssetFactory;
-	import engine.framework.factories.BitmapFactory;
-	import engine.framework.factories.LibraryFactory;
+	import engine.framework.factories.ClassLibraryFactory;
+	import engine.framework.factories.ObjectTypeFactory;
+	import engine.framework.factories.XmlConfigFactory;
 	import engine.framework.interfaces.IAssetFactory;
-	import engine.framework.interfaces.IBitmapFactory;
-	import engine.framework.interfaces.IComponentProvider;
+	import engine.framework.interfaces.IConfig;
+	import engine.framework.interfaces.IConfigFactory;
 	import engine.framework.interfaces.IGame;
 	import engine.framework.interfaces.IGameBuilder;
-	import engine.framework.interfaces.ILibraryFactory;
-	import engine.framework.interfaces.ILibraryProvider;
-	import engine.framework.providers.BitmapProvider;
-	import engine.framework.providers.ComponentProvider;
-	import engine.framework.providers.LibraryProvider;
-	import engine.graphics.factories.AnimationFactory;
+	import engine.framework.interfaces.IObjectFactory;
+	import engine.framework.interfaces.IObjectProvider;
+	import engine.framework.interfaces.IObjectsProvider;
+	import engine.framework.interfaces.ITimeline;
+	import engine.framework.providers.ConfigProvider;
+	import engine.framework.providers.ObjectProvider;
+	import engine.framework.providers.ObjectsProvider;
+	import engine.graphics.builders.AnimationBuilder;
+	import engine.graphics.builders.BitmapBuilder;
+	import engine.graphics.builders.CanvasBuilder;
+	import engine.graphics.builders.CellAnimationBuilder;
+	import engine.graphics.builders.CellAnimationFrameBuilder;
+	import engine.graphics.builders.CellBuilder;
+	import engine.graphics.builders.CellsBuilder;
+	import engine.graphics.contexts.CanvasRenderContext;
+	import engine.graphics.enums.AnimationTypeEnum;
 	import engine.graphics.factories.AnimationFrameFactory;
+	import engine.graphics.factories.BitmapFactory;
 	import engine.graphics.factories.CanvasFactory;
+	import engine.graphics.factories.CellAnimationFactory;
+	import engine.graphics.factories.CellAnimationFrameFactory;
 	import engine.graphics.factories.CellFactory;
 	import engine.graphics.factories.CellsFactory;
 	import engine.graphics.interfaces.IAnimation;
-	import engine.graphics.interfaces.IAnimationFactory;
-	import engine.graphics.interfaces.IAnimationProvider;
-	import engine.graphics.interfaces.IBitmapProvider;
+	import engine.graphics.interfaces.IAnimationBuilder;
 	import engine.graphics.interfaces.ICanvas;
-	import engine.graphics.interfaces.ICanvasConfig;
-	import engine.graphics.interfaces.ICanvasFactory;
-	import engine.graphics.interfaces.ICanvasProvider;
-	import engine.graphics.interfaces.ICanvasRenderer;
-	import engine.graphics.interfaces.ICells;
-	import engine.graphics.interfaces.ICellsFactory;
-	import engine.graphics.interfaces.ICellsProvider;
 	import engine.graphics.interfaces.IDrawable;
-	import engine.graphics.interfaces.IDrawableAnimation;
-	import engine.graphics.interfaces.IRenderer;
-	import engine.graphics.interfaces.ISprites;
-	import engine.graphics.providers.AnimationProvider;
+	import engine.graphics.interfaces.IRenderContext;
 	import engine.graphics.providers.CanvasProvider;
 	import engine.graphics.providers.CellsProvider;
-	import engine.graphics.renderers.CanvasRenderer;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
+
 
 	
 	/**
@@ -66,13 +64,21 @@ package demo.builders
 		
 		private var _configXml:XML;
 		
+		private var _configNamespace:Namespace;
+		
+		//private var _schemaXml:XML;
 		
 		
-		public function GameBuilder(container:DisplayObjectContainer, configXml:XML) 
+		
+		public function GameBuilder(container:DisplayObjectContainer, configXml:XML, configNamespace:Namespace) 
 		{
 			this._container = container;
 			
 			this._configXml = configXml;
+			
+			this._configNamespace = configNamespace;
+
+	
 		}
 		
 		
@@ -80,12 +86,72 @@ package demo.builders
 
 		public function buildGame():IGame 
 		{
-			var config:IGameConfig = new XmlGameConfigFactory(XmlFactoryTypeProvider.create()).createConfig(this._configXml) as IGameConfig; 
+			var configFactory:IConfigFactory = new XmlConfigFactory(this._configNamespace)
+			
+			//var config:IConfig = new ConfigProvider(configFactory.createConfig(this._configXml));
+			var config:IConfig = configFactory.createConfig(this._configXml);
+		
+			
+			var libraryFactories:IDictionary = new Dictionary();
+			
+			libraryFactories.addItem(LibraryTypeEnum.CLASS, new ClassLibraryFactory(new ClassLibraryBuilder()));
+			
+			var libraryProvider:IObjectProvider = new ObjectProvider(config, new ObjectTypeFactory(libraryFactories));
+
+			
+			var canvasProvider:IObjectProvider = new ObjectProvider(config, new CanvasFactory(new CanvasBuilder()));
 			
 			
-			//var librariesFactory:ILibrariesFactory = LibrariesFactory.create(LibraryFactory.create());
+			var assetFactory:IAssetFactory = new AssetFactory(libraryProvider);
 			
-			var libraryFactory:ILibraryFactory = new LibraryFactory(config.getConfig(ILibraryConfig));
+			
+			var bitmapProvider:IObjectProvider = new ObjectProvider(config, new BitmapFactory(new BitmapBuilder(assetFactory)));
+			
+			
+			var cellsProvider:IObjectProvider = new ObjectProvider(config, new CellsFactory(new CellsBuilder(bitmapProvider), new CellFactory(new CellBuilder())));
+			
+			
+			var animationBuilder:IAnimationBuilder = new AnimationBuilder();
+			
+			var animationFrameFactory:IObjectFactory = new AnimationFrameFactory();
+
+			var animationFactories:IDictionary = new Dictionary();
+			
+			animationFactories.addItem(AnimationTypeEnum.CELL, new CellAnimationFactory(new CellAnimationFrameFactory(new CellAnimationFrameBuilder(), animationFrameFactory), animationBuilder, cellsProvider, new CellAnimationBuilder()));
+			
+			var animationProvider:IObjectProvider = new ObjectProvider(config, new ObjectTypeFactory(animationFactories));
+			
+			
+			var objects:IObjectsProvider = new ObjectsProvider();
+			
+			objects.addType(ICanvas, canvasProvider);
+			
+			objects.addType(BitmapData, bitmapProvider);
+			
+			objects.addType(IAnimation, animationProvider);
+			
+			
+			var canvas:ICanvas = objects.getObject("stageCanvas", ICanvas) as ICanvas; // .getAttributeAs("area", IRectangle) as Rectangle;
+			
+			var animation:IAnimation = objects.getObject("abuIdleAnimation", IAnimation) as IAnimation;
+
+			
+			var renderContext:IRenderContext = new CanvasRenderContext(canvas);
+			
+			//var timeline:ITimeline = new CompositeTimeline();
+			
+			
+			(animation as IDrawable).draw(renderContext, new Point(50, 50));
+			
+			
+			this._container.addChild(canvas as DisplayObject);
+			
+			
+			
+			//var config:IGameConfig = new XmlGameConfigFactory(XmlFactoryTypeProvider.create()).createConfig(this._configXml) as IGameConfig; 
+			
+			
+			/*var libraryFactory:ILibraryFactory = new LibraryFactory(config.getConfig(ILibraryConfig));
 			
 			var libraryProvider:ILibraryProvider = new LibraryProvider(libraryFactory);
 			
@@ -102,12 +168,12 @@ package demo.builders
 			var bitmapProvider:IBitmapProvider = new BitmapProvider(bitmapFactory);
 			
 			
-			var cellsFactory:ICellsFactory = new CellsFactory(config.getConfig(ICellsConfig), CellFactory.create(), bitmapProvider);
+			var cellsFactory:ICellsFactory = new CellsFactory(config, CellFactory.create(), bitmapProvider);
 			
 			var cellsProvider:ICellsProvider = new CellsProvider(cellsFactory);
 			
 			
-			var animationFactory:IAnimationFactory = new AnimationFactory(config.getConfig(IAnimationConfig), new AnimationFrameFactory(), cellsProvider);
+			var animationFactory:IAnimationFactory = new AnimationFactory(config, new AnimationFrameFactory(), cellsProvider);
 			
 			var animationProvider:IAnimationProvider = new AnimationProvider(animationFactory);
 			
@@ -115,20 +181,21 @@ package demo.builders
 			var componentProvider:IComponentProvider = new ComponentProvider(canvasProvider, bitmapProvider, animationProvider);
 			
 			
-			//var cells:ICells = gameFactory.createCells("abuCells");
-		
 			var canvas:ICanvas = componentProvider.getCanvas("stageCanvas");
 			
-			//var canvasRenderer:ICanvasRenderer = CanvasRenderer.create(canvas);
+			var renderContext:IRenderContext = new CanvasRenderContext(canvas);
 			
 			var animation:IAnimation = componentProvider.getAnimation("abuIdleAnimation");
 			
-			//cells.getCellAt(0).render(canvas, new Point(50, 50));
-			
-			//if (animation is IDrawable)
-				//(animation as IDrawable).draw(canvasRenderer, new Point(50, 50));
+			(animation as IDrawable).draw(renderContext, new Point(50, 50));
 
-				
+	
+			
+			
+			this._container.addChild(canvas as DisplayObject);*/
+			
+			
+			
 			/*
 			 * 
 			var mainGameLoop:ICommand = GameLoopCommand.create();
@@ -141,11 +208,7 @@ package demo.builders
 			
 			gameLoop.add(RenderCommand.create(canvasRenderer, drawables));
 			
-			*/
-			
-			
-			this._container.addChild(canvas as DisplayObject);
-			
+			*/			
 			
 			
 			/*var width:int = 640;

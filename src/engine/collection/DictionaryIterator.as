@@ -1,16 +1,12 @@
 package engine.collection 
 {
 	import engine.collection.interfaces.IIterator;
-	import flash.utils.Dictionary;
-	
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class DictionaryIterator implements IIterator 
+	public class DictionaryIterator implements IIterator
 	{
-		
-		//private var _dictionary:Dictionary;
 		
 		private var _numItems:int;
 		
@@ -37,22 +33,22 @@ package engine.collection
 		}
 		
 		
-		public function DictionaryIterator(dictionary:Dictionary) 
+		public function DictionaryIterator(numItems:int, keys:Vector.<*>, values:Vector.<*>) 
 		{
-			this._keys = new Vector.<*>;
+			this._keys = keys;
 			
-			this._values = new Vector.<*>;
+			this._values = values;
 			
-			this._numItems = 0;
+			this._numItems = numItems;
 			
-			for (var k:* in dictionary)
+			/*for (var k:* in dictionary)
 			{
 				this._keys[this._numItems] = k;
 				
 				this._values[this._numItems] = dictionary[k];
 				
 				this._numItems ++;
-			}
+			}*/
 			
 			this.reset();
 		}

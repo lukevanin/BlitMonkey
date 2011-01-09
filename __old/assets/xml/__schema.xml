@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<schema xmlns:element="monkey:element" xmlns:attribute="monkey:attribute" xmlns:limit="monkey:limit" xmlns:where="monkey:where">
+
+	<element:library>
+		<attribute:id type="string" />
+		<attribute:type type="string" />
+	</element:library>
+	
+	<element:library where:type="class">
+		<attribute:class type="string" />
+	</element:library>
+	
+	<element:canvas>
+		<attribute:id type="string" />
+		<attribute:area type="rectangle" />
+		<attribute:pixelSnapping type="string" />
+		<attribute:smoothing type="boolean" />
+		<attribute:transparent type="boolean" />
+		<attribute:backgroundColour type="uint" />
+	</element:canvas>
+	
+	<element:bitmap>
+		<attribute:id type="string" />
+		<attribute:asset type="string "/>
+	</element:bitmap>
+	
+	<element:cells>
+		<attribute:id type="string" />
+		<attribute:bitmap type="string" />
+		<element:cell>
+			<attribute:area type="rectangle" />
+			<attribute:offset type="point" />
+		</element:cell>
+	</element:cells>
+	
+	<element:animation>
+		<attribute:id type="string" />
+		<attribute:type type="string" />
+		<element:frame>
+			<attribute:duration type="number" />
+		</element:frame>
+	</element:animation>
+	
+	<element:animation where:type="cells">
+		<attribute:cells type="string" />
+		<element:frame>
+			<attribute:cell type="int" />
+		</element:frame>
+	</element:animation>
+	
+</schema>

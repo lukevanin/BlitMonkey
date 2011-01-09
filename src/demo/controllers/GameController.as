@@ -1,8 +1,9 @@
 package demo.controllers 
 {
 	import demo.interfaces.IGameController;
+	import engine.framework.interfaces.IDisposable;
+	import engine.graphics.interfaces.IRenderContext;
 	import engine.interfaces.IDisposable;
-	import engine.interfaces.IRenderer;
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -19,17 +20,17 @@ package demo.controllers
 		
 		private var _displayObjectContainer:DisplayObjectContainer;
 		
-		private var _renderer:IRenderer;
+		private var _renderContext:IRenderContext;
 		
 		
 		
-		public function GameController(displayObject:DisplayObject, displayObjectContainer:DisplayObjectContainer, renderer:IRenderer) 
+		public function GameController(displayObject:DisplayObject, displayObjectContainer:DisplayObjectContainer, renderContext:IRenderContext) 
 		{
 			this._displayObject = displayObject;
 			
 			this._displayObjectContainer = displayObjectContainer;
 			
-			this._renderer = renderer;
+			this._renderContext = renderContext;
 			
 			this._displayObjectContainer.addChild(displayObject); // TODO: update from model
 			

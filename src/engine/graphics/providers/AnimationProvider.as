@@ -1,7 +1,7 @@
 package engine.graphics.providers 
 {
-	import engine.collection.interfaces.ISafeDictionary;
-	import engine.collection.SafeDictionary;
+	import engine.collection.interfaces.IDictionary;
+	import engine.collection.Dictionary;
 	import engine.config.interfaces.IAnimationFrameConfig;
 	import engine.graphics.interfaces.IAnimation;
 	import engine.graphics.interfaces.IAnimationFactory;
@@ -13,14 +13,14 @@ package engine.graphics.providers
 	public class AnimationProvider implements IAnimationProvider
 	{
 		
-		private var _animations:ISafeDictionary;
+		private var _animations:IDictionary;
 		
 		private var _animationFactory:IAnimationFactory;
 		
 		
 		public function AnimationProvider(animationFactory:IAnimationFactory) 
 		{
-			this._animations = new SafeDictionary();
+			this._animations = new Dictionary();
 			
 			this._animationFactory = animationFactory;
 		}

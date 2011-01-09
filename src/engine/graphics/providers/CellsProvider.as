@@ -1,7 +1,7 @@
 package engine.graphics.providers 
 {
-	import engine.collection.interfaces.ISafeDictionary;
-	import engine.collection.SafeDictionary;
+	import engine.collection.interfaces.IDictionary;
+	import engine.collection.Dictionary;
 	import engine.graphics.interfaces.ICells;
 	import engine.graphics.interfaces.ICellsFactory;
 	import engine.graphics.interfaces.ICellsProvider;
@@ -12,14 +12,14 @@ package engine.graphics.providers
 	public class CellsProvider implements ICellsProvider
 	{
 		
-		private var _cells:ISafeDictionary;
+		private var _cells:IDictionary;
 		
 		private var _cellsFactory:ICellsFactory;
 		
 		
 		public function CellsProvider(cellsFactory:ICellsFactory) 
 		{
-			this._cells = new SafeDictionary();
+			this._cells = new Dictionary();
 			
 			this._cellsFactory = cellsFactory;
 		}

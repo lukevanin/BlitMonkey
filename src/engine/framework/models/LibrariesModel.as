@@ -1,7 +1,7 @@
 package engine.framework.models 
 {
-	import engine.collection.interfaces.ISafeDictionary;
-	import engine.collection.SafeDictionary;
+	import engine.collection.interfaces.IDictionary;
+	import engine.collection.Dictionary;
 	import engine.framework.interfaces.ILibraries;
 	import engine.framework.interfaces.ILibrary;
 	import flash.utils.Dictionary;
@@ -12,12 +12,12 @@ package engine.framework.models
 	public class LibrariesModel implements ILibraries
 	{
 		
-		private var _collection:ISafeDictionary;
+		private var _collection:IDictionary;
 		
 		
 		public function LibrariesModel() 
 		{
-			this._collection = new SafeDictionary();
+			this._collection = new Dictionary();
 		}
 		
 

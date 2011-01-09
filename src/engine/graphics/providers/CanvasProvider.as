@@ -1,8 +1,9 @@
 package engine.graphics.providers 
 {
-	import engine.collection.interfaces.ISafeDictionary;
-	import engine.collection.SafeDictionary;
-	import engine.config.interfaces.IAnimationFrameConfig;
+	import engine.collection.interfaces.IDictionary;
+	import engine.collection.Dictionary;
+	import engine.framework.interfaces.IComponent;
+	import engine.framework.interfaces.IComponentProvider;
 	import engine.graphics.interfaces.IAnimation;
 	import engine.graphics.interfaces.IAnimationFactory;
 	import engine.graphics.interfaces.IAnimationProvider;
@@ -13,24 +14,30 @@ package engine.graphics.providers
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class CanvasProvider implements ICanvasProvider
+	public class CanvasProvider implements IComponentProvider
 	{
 		
-		private var _canvas:ISafeDictionary;
+		private var _canvas:IDictionary;
 		
 		private var _canvasFactory:ICanvasFactory;
 		
 		
 		public function CanvasProvider(canvasFactory:ICanvasFactory) 
 		{
-			this._canvas = new SafeDictionary();
+			this._canvas = new Dictionary();
 			
 			this._canvasFactory = canvasFactory;
 		}
 		
 
 		
-		public function getCanvas(id:String):ICanvas 
+		public function getComponent(id:String):IComponent
+		{
+			return this.getCanvas(id);
+		}
+		
+		
+		private function getCanvas(id:String):ICanvas 
 		{
 			if (!this._canvas.hasItem(id))
 				this._canvas.addItem(id, this._canvasFactory.createCanvas(id));

@@ -1,5 +1,6 @@
 package engine.common 
 {
+	import com.adobe.crypto.MD5;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	/**
@@ -25,10 +26,41 @@ package engine.common
 		}
 		
 		
+		
 		public static function stringToUint(s:String, r:int = 0):uint
 		{
 			return parseInt(s, r);
 		}
+		
+		
+		public static function stringToInt(s:String, r:int = 0):int
+		{
+			return parseInt(s, r);
+		}
+		
+		
+		
+		
+		public static function stringToFraction(s:String, delimiter:String = "/"):Number
+		{
+			if (s.indexOf(delimiter) != -1)
+			{
+				// fractional form (eg: 1/15)
+				var parts:Array = s.split(delimiter);
+				
+				var a:Number = StringUtil.stringToNumber(parts[0]);
+				
+				var b:Number = StringUtil.stringToNumber(parts[1]);
+				
+				return a / b;
+			}
+			else
+			{
+				// decimal form (eg: 0.25)
+				return StringUtil.stringToNumber(s);
+			}
+		}
+		
 		
 		
 		
@@ -69,6 +101,21 @@ package engine.common
 			r.height = stringToNumber(a[3]);
 			
 			return r;
+		}
+		
+		
+		
+		
+		public static function createGuid():String
+		{
+			return StringUtil.hash(Math.random().toString());
+		}
+		
+		
+		
+		public static function hash(s:String):String
+		{
+			return MD5.hash(s);
 		}
 		
 	}

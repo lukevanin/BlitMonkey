@@ -1,11 +1,13 @@
 package engine.graphics.factories 
 {
 
-	import engine.config.interfaces.ICellsConfig;
-	import engine.config.interfaces.IConfigProvider;
+	import engine.collection.interfaces.IIterator;
+	import engine.framework.interfaces.IConfig;
+	import engine.framework.interfaces.IObjectFactory;
 	import engine.graphics.interfaces.IBitmapProvider;
 	import engine.graphics.interfaces.ICell;
-	import engine.graphics.interfaces.ICellFactory;
+	import engine.graphics.interfaces.ICellBuilder;
+	import engine.graphics.interfaces.ICellsBuilder;
 	import engine.graphics.models.CellsModel;
 	import engine.graphics.interfaces.ICells;
 	import engine.graphics.interfaces.ICellsFactory;
@@ -14,46 +16,39 @@ package engine.graphics.factories
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class CellsFactory implements ICellsFactory
+	public class CellsFactory implements IObjectFactory
 	{
 		
-		private var _config:IConfigProvider;
+		//private var _config:IGameConfig;
 		
-		private var _cellFactory:ICellFactory;
+		private var _builder:ICellsBuilder;
 		
-		private var _bitmapProvider:IBitmapProvider;
+		private var _cellFactory:IObjectFactory;
 		
-		
-		public function CellsFactory(config:IConfigProvider, cellFactory:ICellFactory, bitmapProvider:IBitmapProvider) 
+		public function CellsFactory(builder:ICellsBuilder, cellFactory:IObjectFactory) 
 		{
-			this._config = config;
+			this._builder = builder;
 			
 			this._cellFactory = cellFactory;
-			
-			this._bitmapProvider = bitmapProvider;
-		}
-		
-
-		public function createCells(id:String):ICells 
-		{
-			var config:ICellsConfig = this._config.getConfig(id) as ICellsConfig;
-			
-			var bitmap:BitmapData = this._bitmapProvider.getBitmap(id);
-			
-			var cells:ICells = new CellsModel(new Vector.<ICell>(), bitmap);
-			
-			for (var i:int = 0; i < config.numCells; i++)
-				cells.addCell(this._cellFactory.createCell(config.getCellAt(i)));
-			
-			return cells;
 		}
 		
 		
-		
-		/*public static function create(config:ICellsConfigCollection, cellFactory:ICellFactory, bitmapProvider:IBitmapProvider):CellsFactory
+		public function createObject(config:IConfig):Object 
 		{
-			return new CellsFactory(config, cellFactory, bitmapProvider);
-		}*/
+			var bitmap:String = config.getProperty("bitmap");
+			
+			var iterator:IIterator = config.getConfigIterator();
+			
+			var cells:Vector.<ICell> = new Vector.<ICell>();
+			
+			while (iterator.hasNext)
+			{
+				cells.push(this._cellFactory.createObject(iterator.value as IConfig));
+				iterator.next();
+			}
+			
+			return this._builder.buildCells(bitmap, cells);
+		}
 		
 
 		

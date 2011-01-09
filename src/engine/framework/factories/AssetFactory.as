@@ -2,7 +2,8 @@ package engine.framework.factories
 {
 	import engine.framework.interfaces.IAssetFactory;
 	import engine.framework.interfaces.ILibraries;
-	import engine.framework.interfaces.ILibraryProvider;
+	import engine.framework.interfaces.ILibrary;
+	import engine.framework.interfaces.IObjectProvider;
 	import flash.display.BitmapData;
 	/**
 	 * ...
@@ -11,13 +12,13 @@ package engine.framework.factories
 	public class AssetFactory implements IAssetFactory
 	{
 		
-		private var _libraryProvider:ILibraryProvider;
+		private var _libraryProvider:IObjectProvider;
 		
 		private var _pathDelimiter:String;
 		
 		
 		
-		public function AssetFactory(libraryProvider:ILibraryProvider, pathDelimiter:String = ".") 
+		public function AssetFactory(libraryProvider:IObjectProvider, pathDelimiter:String = ".") 
 		{
 			this._libraryProvider = libraryProvider;
 			
@@ -34,7 +35,7 @@ package engine.framework.factories
 			
 			var classId:String = parts[1];
 			
-			return this._libraryProvider.getLibrary(libraryId).getClass(classId);
+			return (this._libraryProvider.getObject(libraryId) as ILibrary).getClass(classId);
 		}	
 		
 		

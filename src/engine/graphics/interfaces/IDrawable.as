@@ -9,7 +9,7 @@ package engine.graphics.interfaces
 	public interface IDrawable
 	{
 		
-		function drawAt(renderer:IRenderer, position:Point):void
+		function draw(renderContext:IRenderContext, position:Point):void
 		
 	}
 	

@@ -12,6 +12,9 @@ package engine.graphics.interfaces
 		
 		
 		function get numFrames():int;
+		
+		
+		function getFrameAt(index:int):IAnimationFrame;
 
 			
 		

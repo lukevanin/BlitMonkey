@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<monkey:config xmlns:monkey="https://lukevanin@github.com/lukevanin/BlitMonkey.git">
+<m:config xmlns:m="https://lukevanin@github.com/lukevanin/BlitMonkey.git">
 	
 	
 	<!-- swf id="level0Swf" url="" / -->
 	
 	
 	<!-- TODO: parse by game libraries factory -->
-	<monkey:library id="gameLib" type="class" className="demo.libraries.GameLib" />
+	<m:library id="gameLib" type="class" className="demo.libraries.GameLib" />
 	
 	<!-- library id="level0" type="swf" source="level0Swf"/ -->
 
 		
-	<monkey:canvas id="stageCanvas" area="0,0,640,480" pixelSnapping="always" smoothing="false" isTransparent="false" backgroundColour="0x00ff00ff" />
+	<m:canvas id="stageCanvas" area="0,0,640,480" pixelSnapping="always" smoothing="false" transparent="false" backgroundColour="0x00ff00ff" />
 	
 	
-	<monkey:bitmap id="abuCellsBitmap" asset="gameLib.ABU" />
+	<m:bitmap id="abuCellsBitmap" asset="gameLib.ABU" />
 	
 	
-	<monkey:cells id="abuCells" bitmap="abuCellsBitmap">
-		<monkey:cell area="5,4,44,40" offset="33,40" />
+	<m:cells id="abuCells" bitmap="abuCellsBitmap">
+		<m:cell area="5,4,44,40" offset="33,40" />
 		
-		<monkey:cell area="5,4,44 40" offset="33,40" />
+		<m:cell area="5,4,44 40" offset="33,40" />
 			
-		<monkey:cell area="57,2,44,41" offset="33,41" />		
+		<m:cell area="57,2,44,41" offset="33,41" />		
 			
-		<monkey:cell area="106,1,43,42" offset="33,42" />
+		<m:cell area="106,1,43,42" offset="33,42" />
 			
-		<monkey:cell area="152,1,43,42" offset="33,42" />
+		<m:cell area="152,1,43,42" offset="33,42" />
 			
-		<monkey:cell area="199,1,44,42" offset="33,42" />		
-	</monkey:cells>
+		<m:cell area="199,1,44,42" offset="33,42" />		
+	</m:cells>
 	
 	
 	
-	<monkey:animation id="abuIdleAnimation" type="cells" cells="abuCells">
-		<monkey:frame duration="1/7" cell="0" />
+	<m:animation id="abuIdleAnimation" type="cell" cells="abuCells">
+		<m:frame duration="1/7" cell="0" />
 			
-		<monkey:frame duration="1/15" cell="1" />
+		<m:frame duration="1/15" cell="1" />
 			
-		<monkey:frame duration="1/15" cell="2" />
+		<m:frame duration="1/15" cell="2" />
 			
-		<monkey:frame duration="1/15" cell="3" />
+		<m:frame duration="1/15" cell="3" />
 			
-		<monkey:frame duration="1/7" cell="4" />
+		<m:frame duration="1/7" cell="4" />
 			
-		<monkey:frame duration="1/15" cell="3" />
+		<m:frame duration="1/15" cell="3" />
 			
-		<monkey:frame duration="1/15" cell="2" />
+		<m:frame duration="1/15" cell="2" />
 			
-		<monkey:frame duration="1/15" cell="1" />
-	</monkey:animation>
+		<m:frame duration="1/15" cell="1" />
+	</m:animation>
 	
 	
 	
-</monkey:config>
+</m:config>

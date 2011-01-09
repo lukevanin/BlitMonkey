@@ -1,51 +1,57 @@
 package engine.graphics.factories 
 {
-	import engine.config.interfaces.IConfigProvider;
-	import engine.graphics.facades.CanvasFacade;
+	import engine.common.StringUtil;
+	import engine.framework.interfaces.IConfig;
+	import engine.framework.interfaces.IObjectFactory;
 	import engine.graphics.interfaces.ICanvas;
-	import engine.graphics.interfaces.ICanvasConfig;
-	import engine.graphics.interfaces.ICanvasFactory;
-	import engine.graphics.models.CanvasModel;
-	import flash.display.BitmapData;
+	import engine.graphics.interfaces.ICanvasBuilder;
+	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class CanvasFactory implements ICanvasFactory
+	public class CanvasFactory implements IObjectFactory
 	{
 		
-		private var _config:IConfigProvider;
+		//private var _config:IConfig;
+		
+		private var _canvasBuilder:ICanvasBuilder;
 		
 		
-		public function CanvasFactory(config:IConfigProvider) 
+		//public function CanvasFactory(config:IConfig, canvasBuilder:ICanvasBuilder) 
+		public function CanvasFactory(canvasBuilder:ICanvasBuilder) 
 		{
-			this._config = config;
-		}
-		
-
-		public function createCanvas(id:String):ICanvas 
-		{
-			var config:ICanvasConfig = this._config.getConfig(id) as ICanvasConfig;
+			//this._config = config;
 			
-			var model:CanvasModel = CanvasModel.create(config.isTransparent, config.backgroundColour);
-			
-			var bitmap:BitmapData = new BitmapData(config.area.width, config.area.height, config.isTransparent, config.backgroundColour);
-			
-			var canvas:ICanvas = CanvasFacade.create(bitmap, config.pixelSnapping, config.smoothing, model);
-			
-			canvas.x = config.area.x;
-			
-			canvas.y = config.area.y;
-			
-			return canvas;
+			this._canvasBuilder = canvasBuilder;
 		}
 		
 		
 		
-		/*public static function create(config:ICanvasConfigCollection):CanvasFactory
+		public function createObject(config:IConfig):Object
 		{
-			return new CanvasFactory(config);
-		}*/
+			return this.createCanvas(config);
+		}
+		
+		
+		private function createCanvas(config:IConfig):ICanvas
+		{
+			//var config:IConfig = this._config.getConfig(id);
+			
+			
+			var area:Rectangle = StringUtil.stringToRectangle(config.getProperty("area"));
+			
+			var pixelSnapping:String = config.getProperty("pixelSnapping");
+			
+			var transparent:Boolean = StringUtil.stringToBoolean(config.getProperty("transparent"));
+			
+			var smoothing:Boolean = StringUtil.stringToBoolean(config.getProperty("smoothing"));
+			
+			var backgroundColour:uint = StringUtil.stringToUint(config.getProperty("backgroundColour"));			
+			
+			
+			return this._canvasBuilder.buildCanvas(area, pixelSnapping, transparent, smoothing, backgroundColour);
+		}
 		
 	}
 

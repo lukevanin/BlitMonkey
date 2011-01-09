@@ -8,7 +8,7 @@ package engine.framework.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IMediaFactory 
+	public interface __IMediaFactory 
 	{
 		
 		//function createObject(id:String):Object;

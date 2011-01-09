@@ -1,11 +1,9 @@
 package engine.graphics.factories 
 {
-	import engine.config.interfaces.IAnimationFrameConfig;
-	import engine.config.interfaces.ICellAnimationFrame;
-	import engine.config.interfaces.ICellAnimationFrameConfig;
-	import engine.config.models.CellAnimationFrameModel;
+	import engine.common.StringUtil;
+	import engine.framework.interfaces.IConfig;
+	import engine.framework.interfaces.IObjectFactory;
 	import engine.graphics.interfaces.IAnimationFrame;
-	import engine.graphics.interfaces.IAnimationFrameFactory;
 	import engine.graphics.interfaces.ICell;
 	import engine.graphics.models.AnimationFrameModel;
 	
@@ -13,7 +11,7 @@ package engine.graphics.factories
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class AnimationFrameFactory implements IAnimationFrameFactory 
+	public class AnimationFrameFactory implements IObjectFactory 
 	{
 		
 		public function AnimationFrameFactory() 
@@ -22,29 +20,18 @@ package engine.graphics.factories
 		}
 		
 
-		public function createAnimationFrame(config:IAnimationFrameConfig):IAnimationFrame 
+	
+		
+		public function createObject(config:IConfig):Object
 		{
-			if (config is ICellAnimationFrameConfig)
-				return this.createCellAnimationFrame(config as ICellAnimationFrameConfig);
-			else
-				throw new Error("Unsupported frame type " + config);
-				
-			//return new AnimationFrameModel(config.duration, config.cell);
+			var duration:Number = StringUtil.stringToFraction(config.getProperty("duration"));
+			
+			return new AnimationFrameModel(duration);
 		}
 		
 		
 		
 		
-		private function createCellAnimationFrame(config:ICellAnimationFrameConfig):ICellAnimationFrame
-		{
-			return new CellAnimationFrameModel(config.cell, new AnimationFrameModel(config.duration))
-		}
-		
-		
-		/*public static function create():AnimationFrameFactory
-		{
-			return new AnimationFrameFactory();
-		}*/
 		
 	}
 

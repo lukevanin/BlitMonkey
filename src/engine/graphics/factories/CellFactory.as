@@ -1,34 +1,37 @@
 package engine.graphics.factories 
 {
-	import engine.config.interfaces.ICellConfig;
+	import engine.common.StringUtil;
+	import engine.framework.interfaces.IConfig;
+	import engine.framework.interfaces.IObjectFactory;
 	import engine.graphics.interfaces.ICell;
-	import engine.graphics.interfaces.ICellFactory;
-	import engine.graphics.models.CellModel;
-	import flash.display.BitmapData;
+	import engine.graphics.interfaces.ICellBuilder;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class CellFactory implements ICellFactory
+	public class CellFactory implements IObjectFactory
 	{
+		private var _cellBuilder:ICellBuilder;
 		
-		public function CellFactory() 
+		
+		public function CellFactory(cellBuilder:ICellBuilder) 
 		{
+			this._cellBuilder = cellBuilder;
 		}
 		
 		
-		public function createCell(config:ICellConfig):ICell 
+		public function createObject(config:IConfig):Object
 		{
-			return new CellModel(config.area, config.offset);
+			var area:Rectangle = StringUtil.stringToRectangle(config.getProperty("area"));
+			
+			var offset:Point = StringUtil.stringToPoint(config.getProperty("offset"));
+			
+			return this._cellBuilder.buildCell(area, offset);
 		}
 		
 		
-		
-		
-		public static function create():CellFactory
-		{
-			return new CellFactory();
-		}
 		
 	}
 

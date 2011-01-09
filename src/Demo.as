@@ -43,7 +43,7 @@ package
 		
 		private function createGame(container:DisplayObjectContainer):IGame
 		{
-			var builder:IGameBuilder = new GameBuilder(container, XML(new GameLib.CONFIG()));
+			var builder:IGameBuilder = new GameBuilder(container, XML(new GameLib.CONFIG()), GameLib.NAMESPACE);
 			
 			return builder.buildGame();	
 			
