@@ -15,7 +15,7 @@ package
 	 * ...
 	 * @author Luke Van In
 	 */
-	[SWF(width = "800", height = "600", framerate = "60", backgroundColor = "#ffffff")]
+	[SWF(width = "640", height = "360", frameRate = "60", backgroundColor = "#ffffff")]
 	public class Demo extends Sprite 
 	{
 		
@@ -36,7 +36,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			this._game = this.createGame(this);		
+			this._game = this.createGame(this.stage5);		
 		}
 		
 		

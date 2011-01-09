@@ -1,7 +1,6 @@
 package engine.graphics.interfaces 
 {
 	import flash.display.BitmapData;
-	import flash.display.IBitmapDrawable;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	

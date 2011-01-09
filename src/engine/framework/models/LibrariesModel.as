@@ -1,7 +1,7 @@
 package engine.framework.models 
 {
-	import engine.collection.interfaces.IDictionary;
-	import engine.collection.Dictionary;
+	import engine.common.interfaces.IDictionary;
+	import engine.common.Dictionary;
 	import engine.framework.interfaces.ILibraries;
 	import engine.framework.interfaces.ILibrary;
 	import flash.utils.Dictionary;

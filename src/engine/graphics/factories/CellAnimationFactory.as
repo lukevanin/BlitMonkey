@@ -1,6 +1,6 @@
 package engine.graphics.factories 
 {
-	import engine.collection.interfaces.IIterator;
+	import engine.common.interfaces.IIterator;
 	import engine.framework.interfaces.IConfig;
 	import engine.framework.interfaces.IObjectFactory;
 	import engine.framework.interfaces.IObjectProvider;

@@ -1,6 +1,6 @@
 package engine.graphics.factories 
 {
-	import engine.common.StringUtil;
+	import engine.common.utils.StringUtil;
 	import engine.framework.interfaces.IConfig;
 	import engine.framework.interfaces.IObjectFactory;
 	import engine.graphics.interfaces.IAnimationFrame;

@@ -31,8 +31,12 @@ package engine.graphics.controllers
 			
 			var frame:IAnimationFrame = this._model.getFrameAt(this._model.currentFrame);
 			
+			//trace("AnimationController > update: t:" + time.toFixed(2) + " d:" + delta.toFixed(2) + " duration:" + frame.duration.toFixed(2));
+			
 			while (delta > frame.duration)
 			{
+				//trace("AnimationController > update: d:" + delta.toFixed(2) + " f:" + this._model.currentFrame + " duration:" + frame.duration.toFixed(2)); 
+				
 				delta -= frame.duration;
 				
 				this.gotoNextFrame();
@@ -41,16 +45,8 @@ package engine.graphics.controllers
 			}
 			
 			this._lastUpdateTime = time - delta;
-			
-			
-			/*if (deltaTime >= currentFrame.time) 
-			{
-				this._model.currentFrame = (this._model.currentFrame >= (this._model.numFrames - 1)) ? 0 : this._currentFrameIndex + 1;
-				
-				var excessTime:Number = deltaTime - currentFrame.time;
-				
-				this._lastUpdateTime = time - excessTime; // TODO: adjust to account for time exceeded in last frame
-			}*/			
+						
+			//trace();		
 		}
 		
 		

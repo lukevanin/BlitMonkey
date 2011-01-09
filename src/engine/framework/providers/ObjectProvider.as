@@ -1,7 +1,7 @@
 package engine.framework.providers 
 {
-	import engine.collection.interfaces.IDictionary;
-	import engine.collection.Dictionary;
+	import engine.common.interfaces.IDictionary;
+	import engine.common.Dictionary;
 	import engine.framework.interfaces.IConfig;
 	import engine.framework.interfaces.IObjectFactory;
 	import engine.framework.interfaces.IObjectProvider;

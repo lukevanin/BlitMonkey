@@ -1,8 +1,8 @@
 package engine.framework.factories 
 {
-	import engine.collection.interfaces.IDictionary;
-	import engine.collection.Dictionary;
-	import engine.common.StringUtil;
+	import engine.common.interfaces.IDictionary;
+	import engine.common.Dictionary;
+	import engine.common.utils.StringUtil;
 	import engine.framework.interfaces.IConfig;
 	import engine.framework.interfaces.IConfigFactory;
 	import engine.framework.providers.ConfigProvider;

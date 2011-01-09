@@ -1,7 +1,7 @@
 package engine.graphics.providers 
 {
-	import engine.collection.interfaces.IDictionary;
-	import engine.collection.Dictionary;
+	import engine.common.interfaces.IDictionary;
+	import engine.common.Dictionary;
 	import engine.config.interfaces.IAnimationFrameConfig;
 	import engine.graphics.interfaces.IAnimation;
 	import engine.graphics.interfaces.IAnimationFactory;

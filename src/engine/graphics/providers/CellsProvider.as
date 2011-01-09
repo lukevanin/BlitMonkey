@@ -1,7 +1,7 @@
 package engine.graphics.providers 
 {
-	import engine.collection.interfaces.IDictionary;
-	import engine.collection.Dictionary;
+	import engine.common.interfaces.IDictionary;
+	import engine.common.Dictionary;
 	import engine.graphics.interfaces.ICells;
 	import engine.graphics.interfaces.ICellsFactory;
 	import engine.graphics.interfaces.ICellsProvider;

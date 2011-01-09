@@ -11,7 +11,7 @@
 	<!-- library id="level0" type="swf" source="level0Swf"/ -->
 
 		
-	<m:canvas id="stageCanvas" area="0,0,640,480" pixelSnapping="always" smoothing="false" transparent="false" backgroundColour="0x00ff00ff" />
+	<m:canvas id="stageCanvas" area="0,0,640,360" pixelSnapping="always" smoothing="false" transparent="false" backgroundColour="0x00ff00ff" />
 	
 	
 	<m:bitmap id="abuCellsBitmap" asset="gameLib.ABU" />

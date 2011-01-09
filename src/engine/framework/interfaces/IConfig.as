@@ -1,6 +1,6 @@
 package engine.framework.interfaces 
 {
-	import engine.collection.interfaces.IIterator;
+	import engine.common.interfaces.IIterator;
 	
 	/**
 	 * ...

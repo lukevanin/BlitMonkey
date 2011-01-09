@@ -2,9 +2,9 @@ package engine.framework.providers
 {
 	import demo.enums.LibraryEnum;
 	import demo.libraries.GameLib;
-	import engine.collection.interfaces.IIterator;
-	import engine.collection.interfaces.IDictionary;
-	import engine.collection.Dictionary;
+	import engine.common.interfaces.IIterator;
+	import engine.common.interfaces.IDictionary;
+	import engine.common.Dictionary;
 	import engine.config.interfaces.ILibraryConfig;
 	import engine.framework.interfaces.ILibraries;
 	import engine.framework.interfaces.ILibrary;

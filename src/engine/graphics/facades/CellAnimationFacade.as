@@ -5,7 +5,7 @@ package engine.graphics.facades
 	import engine.graphics.interfaces.ICell;
 	import engine.graphics.interfaces.ICellAnimationFrame;
 	import engine.graphics.interfaces.ICells;
-	import engine.graphics.interfaces.IDrawable;
+	import engine.graphics.interfaces.IGraphic;
 	import engine.graphics.interfaces.IRenderContext;
 	import flash.geom.Point;
 	
@@ -13,7 +13,7 @@ package engine.graphics.facades
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class CellAnimationFacade implements IAnimation, IDrawable 
+	public class CellAnimationFacade implements IAnimation, IGraphic 
 	{
 		
 		private var _animation:IAnimation;

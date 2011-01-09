@@ -1,8 +1,8 @@
 package engine.framework.factories 
 {
 	import adobe.utils.CustomActions;
-	import engine.collection.interfaces.IDictionary;
-	import engine.collection.interfaces.IDictionary;
+	import engine.common.interfaces.IDictionary;
+	import engine.common.interfaces.IDictionary;
 	import engine.framework.adapters.ApplicationDomainGameLibraryAdapter;
 	import engine.framework.enums.LibraryTypeEnum;
 	import engine.framework.interfaces.IConfig;
