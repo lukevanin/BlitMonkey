@@ -36,7 +36,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			this._game = this.createGame(this.stage5);		
+			this._game = this.createGame(this.stage);		
 		}
 		
 		

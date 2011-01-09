@@ -46,7 +46,7 @@ package engine.graphics.controllers
 			
 			this._lastUpdateTime = time - delta;
 						
-			//trace();		
+			//trace("AnimationController > update:" + this._model.currentFrame);		
 		}
 		
 		

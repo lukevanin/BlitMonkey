@@ -4,8 +4,7 @@
 	
 	<!-- swf id="level0Swf" url="" / -->
 	
-	
-	<!-- TODO: parse by game libraries factory -->
+		
 	<m:library id="gameLib" type="class" className="demo.libraries.GameLib" />
 	
 	<!-- library id="level0" type="swf" source="level0Swf"/ -->
