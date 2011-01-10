@@ -19,22 +19,22 @@ package engine.graphics.models
 
 		public function get area():Rectangle
 		{
-			return this._area;
+			return this._area.clone();
 		}
 		
 		
 		public function get offset():Point
 		{
-			return this._offset;
+			return this._offset.clone();
 		}
 		
 		
 		//public function CellModel(area:Rectangle, offset:Point, bitmapData:BitmapData) 
 		public function CellModel(area:Rectangle, offset:Point) 
 		{
-			this._area = area;
+			this._area = area.clone();
 			
-			this._offset = offset;
+			this._offset = offset.clone();
 		}
 		
 	}

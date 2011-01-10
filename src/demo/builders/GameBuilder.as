@@ -32,12 +32,15 @@ package demo.builders
 	import engine.framework.providers.ObjectsProvider;
 	import engine.graphics.builders.AnimationBuilder;
 	import engine.graphics.builders.BitmapBuilder;
+	import engine.graphics.builders.BitmapSpriteBuilder;
 	import engine.graphics.builders.CanvasBuilder;
 	import engine.graphics.builders.CellAnimationBuilder;
 	import engine.graphics.builders.CellAnimationFrameBuilder;
 	import engine.graphics.builders.CellBuilder;
 	import engine.graphics.builders.CellsBuilder;
 	import engine.graphics.builders.CompositeGraphicBuilder;
+	import engine.graphics.builders.GraphicSpriteBuilder;
+	import engine.graphics.builders.SpriteBuilder;
 	import engine.graphics.commands.DrawGraphicCommand;
 	import engine.graphics.contexts.CanvasRenderContext;
 	import engine.graphics.enums.AnimationTypeEnum;
@@ -54,6 +57,8 @@ package demo.builders
 	import engine.graphics.interfaces.ICompositeGraphic;
 	import engine.graphics.interfaces.IGraphic;
 	import engine.graphics.interfaces.IRenderContext;
+	import engine.graphics.interfaces.ISprite;
+	import engine.graphics.interfaces.ISpriteBuilder;
 	import engine.graphics.providers.CanvasProvider;
 	import engine.graphics.providers.CellsProvider;
 	import flash.display.Bitmap;
@@ -146,20 +151,41 @@ package demo.builders
 			
 			
 			var canvas:ICanvas = objects.getObject("stageCanvas", ICanvas) as ICanvas; // .getAttributeAs("area", IRectangle) as Rectangle;
-			
-			var animation:IAnimation = objects.getObject("abuIdleAnimation", IAnimation) as IAnimation;
 
+			
+			var spriteBuilder:ISpriteBuilder = new SpriteBuilder();
+			
+			
+			var backgroundBitmap:BitmapData = objects.getObject("backgroundBitmap", BitmapData) as BitmapData;
+			
+			var backgroundSprite:ISprite = new BitmapSpriteBuilder(spriteBuilder).buildSprite(backgroundBitmap);
+			
+			
+			var monkeyIdleAnimation:IAnimation = objects.getObject("abuIdleAnimation", IAnimation) as IAnimation;
+			
+			var monkeyRunAnimation:IAnimation = objects.getObject("abuRunRightAnimation", IAnimation) as IAnimation;
+			
+			var monkeyStandSprite:ISprite = new GraphicSpriteBuilder(spriteBuilder).buildSprite(monkeyIdleAnimation as IGraphic, new Point(105, 160));
+			
+			var monkeyRunSprite:ISprite = new GraphicSpriteBuilder(spriteBuilder).buildSprite(monkeyRunAnimation as IGraphic, new Point(240, 180));
+			
 			
 			var renderContext:IRenderContext = new CanvasRenderContext(canvas);
 			
 			var compositeTimeline:ICompositeTimeline = new CompositeTimelineBuilder().buildTimeline(new Vector.<ITimeline>);
 			
-			compositeTimeline.addTimeline(animation);
+			compositeTimeline.addTimeline(monkeyIdleAnimation);
+			
+			compositeTimeline.addTimeline(monkeyRunAnimation);
 			
 			
 			var compositeGraphic:ICompositeGraphic = new CompositeGraphicBuilder().buildGraphic(new Vector.<IGraphic>());
 			
-			compositeGraphic.addGraphic(animation as IGraphic);
+			compositeGraphic.addGraphic(backgroundSprite);
+			
+			compositeGraphic.addGraphic(monkeyStandSprite);
+			
+			compositeGraphic.addGraphic(monkeyRunSprite);
 			
 			
 			this._container.addChild(canvas as DisplayObject);
@@ -169,7 +195,7 @@ package demo.builders
 			
 			updateCommand.addCommand(new UpdateTimelineCommand(compositeTimeline));
 			
-			updateCommand.addCommand(new DrawGraphicCommand(compositeGraphic, renderContext, new Point(320, 180)));
+			updateCommand.addCommand(new DrawGraphicCommand(compositeGraphic, renderContext, new Point(0, 0)));
 			
 			
 			

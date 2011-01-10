@@ -62,6 +62,8 @@ package engine.graphics.facades
 			
 			var cell:ICell = this._cells.getCellAt(frame.cell);
 			
+			//trace("CellAnimationFacade > draw: frame:" + this._animation.currentFrame + " cell:" + frame.cell);
+			
 			renderContext.blit(this._cells.bitmap, cell.area, position.subtract(cell.offset));
 		}
 		

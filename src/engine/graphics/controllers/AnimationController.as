@@ -55,6 +55,8 @@ package engine.graphics.controllers
 		private function gotoNextFrame():void
 		{
 			this._model.currentFrame = (this._model.currentFrame >= (this._model.numFrames - 1)) ? 0 : this._model.currentFrame + 1;			
+			
+			//trace("AnimationController > gotoNextFrame:" + this._model.currentFrame);
 		}
 		
 	}

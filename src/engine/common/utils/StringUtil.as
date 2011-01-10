@@ -75,6 +75,9 @@ package engine.common.utils
 		{
 			var a:Array = s.split(delimiter);
 			
+			if (a.length != 2)
+				throw new Error("Unexpected format '" + s + "', expected '#" + delimiter + "#'");
+			
 			var p:Point = new Point();
 			
 			p.x = stringToNumber(a[0]);
@@ -89,6 +92,9 @@ package engine.common.utils
 		public static function stringToRectangle(s:String, delimiter:String = ","):Rectangle
 		{
 			var a:Array = s.split(delimiter);
+			
+			if (a.length != 4)
+				throw new Error("Unexpected format '" + s + "', expected '#" + delimiter + "#" + delimiter + "#" + delimiter + "#'");
 			
 			var r:Rectangle = new Rectangle();
 			

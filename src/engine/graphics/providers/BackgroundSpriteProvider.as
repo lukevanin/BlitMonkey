@@ -1,4 +1,4 @@
-package engine.providers 
+package engine.graphics.providers 
 {
 	import engine.interfaces.IBackgroundSprite;
 	import flash.display.BitmapData;
@@ -25,9 +25,9 @@ package engine.providers
 		{
 			this._sourceBitmap = sourceBitmap;
 			
-			this._area = area;
+			this._area = area.clone();
 			
-			this._offset = offset;
+			this._offset = offset.clone();
 		}
 		
 		

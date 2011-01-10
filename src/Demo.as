@@ -15,7 +15,7 @@ package
 	 * ...
 	 * @author Luke Van In
 	 */
-	[SWF(width = "640", height = "360", frameRate = "60", backgroundColor = "#ffffff")]
+	[SWF(width = "640", height = "200", frameRate = "60", backgroundColor = "#ffffff")]
 	public class Demo extends Sprite 
 	{
 		

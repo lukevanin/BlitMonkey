@@ -30,7 +30,7 @@ package engine.graphics.providers
 		
 		public function AnimatedSpriteProvider(position:Point, sourceBitmap:BitmapData, frames:Vector.<IFrame>, currentFrameIndex:int = 0) 
 		{
-			this._position = position;
+			this._position = position.clone();
 			
 			this._sourceBitmap = sourceBitmap;
 			

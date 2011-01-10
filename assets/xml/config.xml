@@ -13,14 +13,15 @@
 	<m:canvas id="stageCanvas" area="0,0,640,360" pixelSnapping="always" smoothing="false" transparent="false" backgroundColour="0x00ff00ff" />
 	
 	
+	<m:bitmap id="backgroundBitmap" asset="gameLib.BACKGROUND" />
+	
 	<m:bitmap id="abuCellsBitmap" asset="gameLib.ABU" />
 	
 	
 	<m:cells id="abuCells" bitmap="abuCellsBitmap">
+		<!-- idle/wait -->
 		<m:cell area="5,4,44,40" offset="33,40" />
 		
-		<m:cell area="5,4,44 40" offset="33,40" />
-			
 		<m:cell area="57,2,44,41" offset="33,41" />		
 			
 		<m:cell area="106,1,43,42" offset="33,42" />
@@ -28,12 +29,32 @@
 		<m:cell area="152,1,43,42" offset="33,42" />
 			
 		<m:cell area="199,1,44,42" offset="33,42" />		
+		
+		<!-- run -->
+		<m:cell area="4,54,50,34" offset="0,34" />
+		
+		<m:cell area="59,60,51,28" offset="0,34" />
+		
+		<m:cell area="115,60,50,26" offset="0,34" />
+		
+		<m:cell area="169,57,48,30" offset="0,34" />
+		
+		<m:cell area="221,55,45,31" offset="0,34" />
+		
+		<m:cell area="4,97,50,34" offset="0,34" />
+		
+		<m:cell area="57,102,51,28" offset="0,34" />
+		
+		<m:cell area="108,95,51,30" offset="0,34" />
+		
+		<m:cell area="165,95,45,31" offset="0,34" />
+		
 	</m:cells>
 	
 	
 	
 	<m:animation id="abuIdleAnimation" type="cell" cells="abuCells">
-		<m:frame duration="1/7" cell="0" />
+		<m:frame duration="1/7.5" cell="0" />
 			
 		<m:frame duration="1/15" cell="1" />
 			
@@ -41,8 +62,8 @@
 			
 		<m:frame duration="1/15" cell="3" />
 			
-		<m:frame duration="1/7" cell="4" />
-			
+		<m:frame duration="1/7.5" cell="4" />
+		
 		<m:frame duration="1/15" cell="3" />
 			
 		<m:frame duration="1/15" cell="2" />
@@ -50,6 +71,26 @@
 		<m:frame duration="1/15" cell="1" />
 	</m:animation>
 	
+	
+	<m:animation id="abuRunRightAnimation" type="cell" cells="abuCells">
+		<m:frame duration="1/15" cell="5" />
+			
+		<m:frame duration="1/15" cell="6" />
+			
+		<m:frame duration="1/15" cell="7" />
+			
+		<m:frame duration="1/15" cell="8" />
+		
+		<m:frame duration="1/15" cell="9" />
+		
+		<m:frame duration="1/15" cell="10" />
+		
+		<m:frame duration="1/15" cell="11" />
+		
+		<m:frame duration="1/15" cell="12" />
+		
+		<m:frame duration="1/15" cell="13" />
+	</m:animation>
 	
 	
 </m:config>
