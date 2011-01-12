@@ -1,5 +1,30 @@
 BlitMonkey
 
+2011-01-12
+Sprite state is a command list (parallel by default), also extends general state (and composite state).
+
+Animation is a serial command list (to extend a generic timed command list). 
+
+Frames are command lists (parallel by default). 
+
+Groups exist to pre-append their id to their children id's, they do not influence created structure in any way.
+
+Offset in animation cascades to child frames, but can be over-ridden by child frames.
+
+Frame default duration is 1, but can be overridden.
+
+Frame default loops is 0, which implies infinite looping, otherwise loop indicates the number of times the animation plays.
+
+All objects act as groups for the purpose of accessing children.
+
+Children wihtout id's can be accessed using square brackets with a numeric index of the child eg: [].
+
+The "graphic" tag in the "animation" node, and the "animation" and "sound" nodes in the sprite "state" nodes are equivalent commands (eg: setGraphic(), playAnimation(), playSound()).
+
+
+
+
+
 2011-01-11
 Added another animation.
 

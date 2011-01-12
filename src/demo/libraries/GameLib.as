@@ -15,12 +15,12 @@ package demo.libraries
 		public static const CONFIG:Class;
 		
 		
-		[Embed(source='../../../assets/graphics/background.png')]
-		public static const BACKGROUND:Class;		
+		//[Embed(source='../../../assets/graphics/background.png')]
+		//public static const BACKGROUND:Class;		
 		
 		
-		[Embed(source='../../../assets/graphics/Abu.png')]
-		public static const ABU:Class;
+		[Embed(source='../../../assets/graphics/harvestmoonfriendsofmineraltown_jack-basic_sheet.png')]
+		public static const JACK_SPRITE_SHEET:Class;
 		
 		
 	}
