@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<m:config xmlns:m="https://lukevanin@github.com/lukevanin/BlitMonkey.git">
+	
+	
+	<!-- swf id="level0Swf" url="" / -->
+	
+		
+	<m:library id="gameLib" type="class" className="demo.libraries.GameLib" />
+	
+	<!-- library id="level0" type="swf" source="level0Swf"/ -->
+
+		
+	<m:canvas id="stageCanvas" area="0,0,640,360" pixelSnapping="always" smoothing="false" transparent="false" backgroundColour="0x00ff00ff" />
+	
+	
+	<!-- m:bitmap id="backgroundBitmap" asset="gameLib.BACKGROUND" / -->
+	
+	<m:group id="bitmaps">
+		<m:bitmap id="jack" asset="gameLib.JACK_SPRITE_SHEET" />
+	</m:group>
+	
+	
+	<m:group id="sounds">
+		<m:sound id="walk" asset="gameLib.WALK_SOUND" />
+	</m:group>	
+	
+	
+	<m:graphics id="jackCharacterGraphics" type="cell" bitmap="bitmaps.jack" area="0,0,400,120" cell="40,40" />
+
+	<m:graphics id="jackIconGraphics" type="cell" bitmap="bitmaps.jack" area="360,80,400,100" cell="20,20" />
+	
+	<!-- m:graphics id="jackIconGraphics" type="range" name="JACK_CELLS_##" / -->
+	
+	
+	<m:group id="animations">
+		<m:group id="jack">
+			
+			<m:animation id="sleep" framerate="2">
+				<m:frame>
+					<m:graphic id="jackCharacterGraphics[19]" />
+				</m:frame>
+				<m:frame>
+					<m:graphic id="jackCharacterGraphics[25]" />
+				</m:frame>
+			</m:animation>
+			
+			
+			<m:animation id="snore" framerate="4" offset="0,-26">
+				<m:frame>
+					<m:graphic id="jackIconGraphics[0]" />
+				</m:frame>
+				<m:frame>
+					<m:graphic id="jackIconGraphics[1]" />
+				</m:frame>
+				<m:frame>
+					<m:graphic id="jackIconGraphics[2]" />
+				</m:frame>
+				<m:frame duration="2">
+					<m:graphic id="jackIconGraphics[3]" />
+				</m:frame>
+			</m:animation>
+			
+			
+			<m:group id="idle">
+				<m:animation id="south" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[0]" />
+					</m:frame> 
+				</m:animation>
+				
+				<m:animation id="north" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[3]" />
+					</m:frame> 
+				</m:animation>	
+			
+				<m:animation id="west" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[10]" />
+					</m:frame>
+				</m:animation>
+				
+				<m:animation id="east" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[13]" />
+					</m:frame>
+				</m:animation>
+			</m:group>
+			
+			
+			<m:group id="walk">
+				<m:animation id="south" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[1]" />
+					</m:frame>
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[2]" />
+					</m:frame>
+				</m:animation>
+				
+				<m:animation id="north" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[4]" />
+					</m:frame>
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[5]" />
+					</m:frame>
+				</m:animation>
+				
+				<m:animation id="west" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[11]" />
+					</m:frame> 
+					<m:frame>
+						<gm:raphic id="jackCharacterGraphics[12]" />
+					</m:frame> 
+				</m:animation>
+				
+				<m:animation id="east" framerate="8">
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[14]" />
+					</m:frame> 
+					<m:frame>
+						<m:graphic id="jackCharacterGraphics[15]" />
+					</m:frame> 
+				</m:animation>
+			</m:group>
+		</m:group>
+	</m:group>		
+	
+	
+	
+
+	
+
+	
+	<m:group id="sprites">
+		<m:sprite id="jack" defaultState="sprites.jack.idle.north">
+			<m:transform>
+				<!-- m:translate x="0" y="0" / -->
+				<!-- m:scale x="1.0" y="1.0" / -->
+				<!-- m:rotate angle="0" / -->
+			</m:transform>
+			
+			
+			<m:state id="sleep">
+				<m:animation id="animations.jack.sleep" />
+				<m:animation id="animations.jack.snore" />
+			</m:state>
+			
+			
+			<m:state id="idle">
+				<m:state id="north">
+					<m:animation id="animations.jack.idle.north" />
+				</m:state>
+				<m:state id="west">
+					<m:animation id="animations.jack.idle.west" />
+				</m:state> 
+				<m:state id="south">
+					<m:animation id="animations.jack.idle.south" />
+				</m:state> 
+				<m:state id="east">
+					<m:animation id="animations.jack.idle.east" />
+				</m:state> 
+			</m:state>
+			
+			<m:state id="walk">
+				<m:state id="north">
+					<m:animation id="animations.jack.walk.north" />
+					<m:sound id="sounds.walk" />
+				</m:state> 
+				<m:state id="west">
+					<m:animation id="animations.jack.walk.west" />
+					<m:sound id="sounds.walk" />
+				</m:state> 
+				<m:state id="south">
+					<m:animation id="animations.jack.walk.south" />
+					<m:sound id="sounds.walk" />
+				</m:state> 
+				<m:state id="east">
+					<m:animation id="animations.jack.walk.east" />
+					<m:sound id="sounds.walk" />
+				</m:state>
+			</m:state>
+		</m:sprite>
+	</m:group>	
+
+	
+	
+	<m:actor id="player" sprite="sprites.jack">
+		<m:behavior id="" />
+	</m:actor>
+	
+	
+</m:config>

@@ -7,11 +7,9 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface ICell
+	public interface ICell extends IGraphic
 	{
-		function get area():Rectangle;
 		
-		function get offset():Point;
 	}
 	
 }

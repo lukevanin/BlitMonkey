@@ -8,7 +8,7 @@ package engine.framework.interfaces
 	public interface IClassLibraryBuilder 
 	{
 		
-		function buildClassLibrary(className:String):ILibrary;
+		function buildClassLibrary(classReference:Class):ILibrary;
 		
 	}
 	

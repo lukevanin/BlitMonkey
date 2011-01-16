@@ -45,6 +45,10 @@ package engine.graphics.interfaces
 		
 		function set smoothing(smoothing:Boolean):void;
 		
+		
+		
+		function clear():void;
+		
 	}
 	
 }

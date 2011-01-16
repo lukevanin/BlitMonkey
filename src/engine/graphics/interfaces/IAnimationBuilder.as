@@ -1,5 +1,6 @@
 package engine.graphics.interfaces 
 {
+	import engine.common.interfaces.ICollection;
 	
 	/**
 	 * ...
@@ -8,7 +9,7 @@ package engine.graphics.interfaces
 	public interface IAnimationBuilder 
 	{
 		
-		function buildAnimation(frames:Vector.<IAnimationFrame>):IAnimation;
+		function buildAnimation(frames:ICollection, framesPerSecond:int, currentFrame:int = 0, isPlaying:Boolean = false):IAnimation;
 		
 	}
 	

@@ -7,10 +7,10 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IAnimationFrame
+	public interface IAnimationFrame extends IGraphic
 	{
 		
-		function get duration():Number;
+		//function get duration():int;
 		
 		
 		//function get cell():int;

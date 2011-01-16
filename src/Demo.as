@@ -15,7 +15,7 @@ package
 	 * ...
 	 * @author Luke Van In
 	 */
-	[SWF(width = "640", height = "200", frameRate = "60", backgroundColor = "#ffffff")]
+	[SWF(width = "640", height = "400", frameRate = "60", backgroundColor = "#ffffff")]
 	public class Demo extends Sprite 
 	{
 		
@@ -36,14 +36,21 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			this._game = this.createGame(this.stage);		
+			var container:Sprite = new Sprite();
+			
+			container.scaleX = container.scaleY = 2.0;
+			
+			this.addChild(container);
+			
+			this._game = this.createGame(container);		
 		}
 		
 		
 		
 		private function createGame(container:DisplayObjectContainer):IGame
 		{
-			var builder:IGameBuilder = new GameBuilder(container, XML(new GameLib.CONFIG()), GameLib.NAMESPACE);
+			//var builder:IGameBuilder = new GameBuilder(container, XML(new GameLib.CONFIG()), GameLib.NAMESPACE);
+			var builder:IGameBuilder = new GameBuilder(container); 
 			
 			return builder.buildGame();	
 			

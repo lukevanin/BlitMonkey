@@ -1,6 +1,7 @@
 package engine.graphics.interfaces 
 {
-	import engine.framework.interfaces.ITimeline;
+	import engine.common.interfaces.ITimeline;
+
 	
 	/**
 	 * ...
@@ -10,12 +11,10 @@ package engine.graphics.interfaces
 	{
 
 		
+		function play():void;
 		
 		
-		//function play(repeat:int = 0):void;
-		
-		
-		//function stop():void;
+		function stop():void;
 
 
 		//function pause(pause:Boolean):void;

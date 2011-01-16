@@ -9,7 +9,7 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface ISprite extends IGraphic
+	public interface ISprite extends IGraphic, IStateContext
 	{
 		
 		function get position():Point;

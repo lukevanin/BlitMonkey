@@ -5,8 +5,11 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IAnimation extends IAnimationController
+	public interface IAnimation extends IAnimationController, IGraphic
 	{
+		
+		function get isPlaying():Boolean;
+		
 		
 		function get currentFrame():int;
 		
@@ -14,7 +17,13 @@ package engine.graphics.interfaces
 		function get numFrames():int;
 		
 		
-		function getFrameAt(index:int):IAnimationFrame;
+		function get framesPerSecond():int;
+		
+		//function set framesPerSecond(framesPerSecond:int):void;
+		
+		
+		
+		//function getFrameAt(index:int):IAnimationFrame;
 
 			
 		

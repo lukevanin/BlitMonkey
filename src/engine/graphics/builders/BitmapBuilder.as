@@ -1,28 +1,50 @@
 package engine.graphics.builders 
 {
+	import engine.common.utils.BitmapUtil;
 	import engine.framework.interfaces.IAssetFactory;
+	import engine.graphics.facades.BitmapFacade;
+	import engine.graphics.interfaces.IBitmap;
 	import engine.graphics.interfaces.IBitmapBuilder;
+	import engine.graphics.interfaces.IBitmapModel;
+	import engine.graphics.interfaces.IGraphicModel;
+	import engine.graphics.interfaces.IGraphicView;
+	import engine.graphics.models.BitmapModel;
+	import engine.graphics.models.GraphicModel;
+	import engine.graphics.views.BitmapView;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.DisplayObject;
+	import flash.display.IBitmapDrawable;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class BitmapBuilder implements IBitmapBuilder
+	public class BitmapBuilder
 	{
 		
-		private var _assetFactory:IAssetFactory;
 		
-		
-		public function BitmapBuilder(assetFactory:IAssetFactory) 
+		public function BitmapBuilder() 
 		{
-			this._assetFactory = assetFactory;
 		}
 		
 		
-		public function buildBitmap(asset:String):BitmapData
+		public function buildBitmap(source:IBitmapDrawable, graphicModel:IGraphicModel = null, area:Rectangle = null):IBitmap
 		{
-			return (this._assetFactory.createObject(asset) as Bitmap).bitmapData;
+			var bitmapData:BitmapData = BitmapUtil.getBitmapData(source);
+			
+			if (graphicModel == null)
+				graphicModel = new GraphicModel(new Point());
+			
+			if (area == null)
+				area = bitmapData.rect;
+				
+			var model:IBitmapModel = new BitmapModel(graphicModel, area);
+			
+			var view:IGraphicView = new BitmapView(bitmapData, model);
+				
+			return new BitmapFacade(model, view);
 		}
 		
 	}

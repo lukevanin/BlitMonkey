@@ -27,7 +27,7 @@ package engine.graphics.builders
 			
 			var bitmap:BitmapData = new BitmapData(area.width, area.height, transparent, backgroundColour);
 			
-			var canvas:ICanvas = CanvasFacade.create(bitmap, pixelSnapping, smoothing, model);
+			var canvas:ICanvas = new CanvasFacade(bitmap, pixelSnapping, smoothing, model);
 			
 			canvas.x = area.x;
 			

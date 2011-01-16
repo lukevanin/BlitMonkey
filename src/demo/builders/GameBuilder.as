@@ -1,75 +1,37 @@
 package demo.builders 
 {
 	import demo.facades.GameFacade;
-	import engine.common.interfaces.ICommand;
-	import engine.common.interfaces.IDictionary;
-	import engine.common.Dictionary;
-	import engine.common.interfaces.IStoppableCommand;
-	import engine.framework.builders.ClassLibraryBuilder;
-	import engine.framework.builders.CompositeTimelineBuilder;
-	import engine.framework.commands.CompositeCommand;
-	import engine.framework.commands.EventCommand;
-	import engine.framework.commands.UpdateTimelineCommand;
-	import engine.framework.enums.LibraryTypeEnum;
-	import engine.framework.facades.CompositeTimelineFacade;
-	import engine.framework.factories.AssetFactory;
-	import engine.framework.factories.ClassLibraryFactory;
-	import engine.framework.factories.ObjectTypeFactory;
-	import engine.framework.factories.XmlConfigFactory;
-	import engine.framework.interfaces.IAssetFactory;
-	import engine.framework.interfaces.ICompositeCommand;
-	import engine.framework.interfaces.ICompositeTimeline;
-	import engine.framework.interfaces.IConfig;
-	import engine.framework.interfaces.IConfigFactory;
+	import demo.libraries.GameLib;
+	import engine.common.Collection;
+	import engine.common.interfaces.ICollection;
+	import engine.common.utils.BitmapUtil;
+	import engine.common.utils.TimeUtil;
 	import engine.framework.interfaces.IGame;
 	import engine.framework.interfaces.IGameBuilder;
-	import engine.framework.interfaces.IObjectFactory;
-	import engine.framework.interfaces.IObjectProvider;
-	import engine.framework.interfaces.IObjectsProvider;
-	import engine.framework.interfaces.ITimeline;
-	import engine.framework.providers.ConfigProvider;
-	import engine.framework.providers.ObjectProvider;
-	import engine.framework.providers.ObjectsProvider;
 	import engine.graphics.builders.AnimationBuilder;
 	import engine.graphics.builders.BitmapBuilder;
-	import engine.graphics.builders.BitmapSpriteBuilder;
 	import engine.graphics.builders.CanvasBuilder;
-	import engine.graphics.builders.CellAnimationBuilder;
-	import engine.graphics.builders.CellAnimationFrameBuilder;
-	import engine.graphics.builders.CellBuilder;
-	import engine.graphics.builders.CellsBuilder;
-	import engine.graphics.builders.CompositeGraphicBuilder;
-	import engine.graphics.builders.GraphicSpriteBuilder;
-	import engine.graphics.builders.SpriteBuilder;
-	import engine.graphics.commands.DrawGraphicCommand;
+	import engine.graphics.builders.CellBitmapBuilder;
+	import engine.graphics.builders.IndexableGraphicAnimationBuilder;
 	import engine.graphics.contexts.CanvasRenderContext;
-	import engine.graphics.enums.AnimationTypeEnum;
-	import engine.graphics.factories.AnimationFrameFactory;
-	import engine.graphics.factories.BitmapFactory;
-	import engine.graphics.factories.CanvasFactory;
-	import engine.graphics.factories.CellAnimationFactory;
-	import engine.graphics.factories.CellAnimationFrameFactory;
-	import engine.graphics.factories.CellFactory;
-	import engine.graphics.factories.CellsFactory;
+	import engine.graphics.facades.IndexableGraphicAnimationFrameFacade;
 	import engine.graphics.interfaces.IAnimation;
-	import engine.graphics.interfaces.IAnimationBuilder;
+	import engine.graphics.interfaces.IBitmapBuilder;
 	import engine.graphics.interfaces.ICanvas;
-	import engine.graphics.interfaces.ICompositeGraphic;
-	import engine.graphics.interfaces.IGraphic;
+	import engine.graphics.interfaces.ICanvasBuilder;
+	import engine.graphics.interfaces.ICellBitmapBuilder;
+	import engine.graphics.interfaces.IGraphicModel;
+	import engine.graphics.interfaces.IIndexableGraphic;
 	import engine.graphics.interfaces.IRenderContext;
-	import engine.graphics.interfaces.ISprite;
-	import engine.graphics.interfaces.ISpriteBuilder;
-	import engine.graphics.providers.CanvasProvider;
-	import engine.graphics.providers.CellsProvider;
-	import flash.display.Bitmap;
+	import engine.graphics.models.GraphicModel;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.PixelSnapping;
 	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+
 
 
 	
@@ -82,23 +44,18 @@ package demo.builders
 		
 		private var _container:DisplayObjectContainer;
 		
-		private var _configXml:XML;
+		//private var _configXml:XML;
 		
-		private var _configNamespace:Namespace;
+		//private var _configNamespace:Namespace;
 		
 		//private var _schemaXml:XML;
 		
 		
 		
-		public function GameBuilder(container:DisplayObjectContainer, configXml:XML, configNamespace:Namespace) 
+		//public function GameBuilder(container:DisplayObjectContainer, configXml:XML, configNamespace:Namespace) 
+		public function GameBuilder(container:DisplayObjectContainer) 
 		{
 			this._container = container;
-			
-			this._configXml = configXml;
-			
-			this._configNamespace = configNamespace;
-
-	
 		}
 		
 		
@@ -106,7 +63,132 @@ package demo.builders
 
 		public function buildGame():IGame 
 		{
-			var configFactory:IConfigFactory = new XmlConfigFactory(this._configNamespace)
+			var stageArea:Rectangle = new Rectangle(0, 0, 320, 200);
+			
+			
+			var tileBitmapData:BitmapData = BitmapUtil.getBitmapData(new GameLib.TILE_PAVE());
+			
+			var characterBitmapData:BitmapData = BitmapUtil.getBitmapData(new GameLib.JACK_SPRITE_SHEET());
+			
+			
+			var bitmapBuilder:BitmapBuilder = new BitmapBuilder();
+			
+			//var bitmap:IBitmap = bitmapBuilder.buildBitmap(characterBitmapData);
+			
+			
+			var cellBitmapBuilder:CellBitmapBuilder = new CellBitmapBuilder();
+			
+			var tileGraphic:IIndexableGraphic = cellBitmapBuilder.buildCellBitmap(tileBitmapData, new Point(40, 40));
+			
+			
+			
+			
+			//var characterGraphic:IIndexableGraphic = cellBitmapBuilder.buildCellBitmap(characterBitmapData, new Point(40, 40), characterGraphicModel);
+
+			
+			var characterSouthGraphicModel:IGraphicModel = new GraphicModel(new Point());
+			
+			var walkSouthFrames:ICollection = new Collection();
+			
+			walkSouthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterSouthGraphicModel, new Rectangle(40, 0, 40, 40)));
+			
+			walkSouthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterSouthGraphicModel, new Rectangle(80,0,40,40)));
+			
+			var walkSouthAnimation:IAnimation = new AnimationBuilder().buildAnimation(walkSouthFrames, 15, characterSouthGraphicModel);
+
+			
+			var characterNorthGraphicModel:IGraphicModel = new GraphicModel(new Point());
+			
+			var walkNorthFrames:ICollection = new Collection();
+			
+			walkNorthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterNorthGraphicModel, new Rectangle(160, 0, 40, 40)));
+			
+			walkNorthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterNorthGraphicModel, new Rectangle(200,0,40,40)));
+			
+			var walkNorthAnimation:IAnimation = new AnimationBuilder().buildAnimation(walkNorthFrames, 15, characterNorthGraphicModel);
+			
+			
+		
+			/*var grid:IGrid = new Grid(new Point(5, 3));
+			
+			grid.setItemAt(10, new Point(0, 0));
+			grid.setItemAt(11, new Point(1, 0));
+			grid.setItemAt(11, new Point(2, 0));
+			grid.setItemAt(11, new Point(3, 0));
+			grid.setItemAt(12, new Point(4, 0));
+			
+			grid.setItemAt(20, new Point(0, 1));
+			grid.setItemAt(21, new Point(1, 1));
+			grid.setItemAt(21, new Point(2, 1));
+			grid.setItemAt(21, new Point(3, 1));
+			grid.setItemAt(22, new Point(4, 1));
+			
+			grid.setItemAt(30, new Point(0, 2));
+			grid.setItemAt(31, new Point(1, 2));
+			grid.setItemAt(31, new Point(2, 2));
+			grid.setItemAt(31, new Point(3, 2));
+			grid.setItemAt(32, new Point(4, 2));*/
+			
+			//var map:IMap = new MapBuilder().buildMap(tileGraphic, grid, new Point(70, 70));
+			
+			
+			var canvasBuilder:ICanvasBuilder = new CanvasBuilder();
+			
+			var canvas:ICanvas = canvasBuilder.buildCanvas(stageArea, PixelSnapping.ALWAYS, false, false, 0xffff00ff);
+			
+			
+			var renderContext:IRenderContext = new CanvasRenderContext(canvas);
+			
+			
+			//map.draw(renderContext, new Point(0, 0));
+			
+			//tileGraphic.draw(renderContext, new Point(0, 0));
+			
+			//cells.index = 0;
+			
+			//cells.draw(renderContext, new Point(40, 40));
+			
+			//animation.draw(renderContext, new Point(80, 80));
+			
+			walkNorthAnimation.position = new Point(120, 200);
+			
+			walkNorthAnimation.play();
+			
+			
+			walkSouthAnimation.position = new Point(40, 0);
+			
+			walkSouthAnimation.play();
+			
+			this._container.addEventListener(Event.ENTER_FRAME, function(e:Event):void { 
+					//map.offset = new Point(map.offset + 1, 0);
+					//map.draw(renderContext, new Point(40, 40));
+					canvas.clear();
+					
+					walkSouthAnimation.position = new Point(walkSouthAnimation.position.x, walkSouthAnimation.position.y + 1);
+					walkSouthAnimation.update(TimeUtil.getSeconds()); 
+					walkSouthAnimation.draw(renderContext); 
+				
+					walkNorthAnimation.position = new Point(walkNorthAnimation.position.x, walkNorthAnimation.position.y - 1);
+					walkNorthAnimation.update(TimeUtil.getSeconds()); 
+					walkNorthAnimation.draw(renderContext); 
+				} );
+			
+			this._container.addChild(canvas as DisplayObject);
+			
+			return new GameFacade(null);
+			
+			
+			//var libraryFactories:IDictionary = new Dictionary();
+			
+			//libraryFactories.addItem(LibraryTypeEnum.CLASS, new ClassLibraryFactory(new ClassLibraryBuilder()));
+			
+			//var libraryProvider:IObjectProvider = new ObjectProvider(config, new ObjectTypeFactory(libraryFactories));
+
+			
+			//var library:ILibrary = new ClassLibraryBuilder().buildClassLibrary();
+			
+			
+			/*var configFactory:IConfigFactory = new XmlConfigFactory(this._configNamespace)
 			
 			var config:IConfig = configFactory.createConfig(this._configXml);
 		
@@ -204,7 +286,7 @@ package demo.builders
 			loop.execute();
 			
 			
-			return new GameFacade(null);
+			return new GameFacade(null);*/
 		}
 		
 	}

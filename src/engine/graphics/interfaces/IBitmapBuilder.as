@@ -1,6 +1,8 @@
 package engine.graphics.interfaces 
 {
 	import flash.display.BitmapData;
+	import flash.display.IBitmapDrawable;
+	import flash.geom.Rectangle;
 	
 	/**
 	 * ...
@@ -9,7 +11,7 @@ package engine.graphics.interfaces
 	public interface IBitmapBuilder 
 	{
 		
-		function buildBitmap(asset:String):BitmapData;
+		function buildBitmap(source:IBitmapDrawable, area:Rectangle = null):IBitmap;
 		
 	}
 	

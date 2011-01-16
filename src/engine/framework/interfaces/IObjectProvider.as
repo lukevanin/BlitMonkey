@@ -8,6 +8,8 @@ package engine.framework.interfaces
 	public interface IObjectProvider 
 	{
 		
+		function addObject(id:String, object:Object):void;
+		
 		function getObject(id:String):Object;
 		
 	}

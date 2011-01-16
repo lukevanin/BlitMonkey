@@ -92,12 +92,18 @@ package engine.graphics.facades
 			this._model = model;
 		}
 		
+		
+		
+		public function clear():void
+		{
+			this.bitmapData.fillRect(this.bitmapData.rect, this.backgroundColour);
+		}
 
 		
-		public static function create(bitmapData:BitmapData, pixelSnapping:String, smoothing:Boolean, model:CanvasModel):CanvasFacade
+		/*public static function create(bitmapData:BitmapData, pixelSnapping:String, smoothing:Boolean, model:CanvasModel):CanvasFacade
 		{
 			return new CanvasFacade(bitmapData, pixelSnapping, smoothing, model);
-		}
+		}*/
 		
 	}
 

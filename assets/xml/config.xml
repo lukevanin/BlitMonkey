@@ -5,128 +5,84 @@
 	<!-- swf id="level0Swf" url="" / -->
 	
 		
-	<m:library id="gameLib" type="class" className="demo.libraries.GameLib" />
+	<m:library id="library.main" type="class" className="demo.libraries.GameLib" />
 	
 	<!-- library id="level0" type="swf" source="level0Swf"/ -->
 
 		
 	<m:canvas id="stageCanvas" area="0,0,640,360" pixelSnapping="always" smoothing="false" transparent="false" backgroundColour="0x00ff00ff" />
 	
-	
-	<!-- m:bitmap id="backgroundBitmap" asset="gameLib.BACKGROUND" / -->
-	
-	<m:group id="bitmaps">
-		<m:bitmap id="jack" asset="gameLib.JACK_SPRITE_SHEET" />
-	</m:group>
-	
-	
-	<m:group id="sounds">
-		<m:sound id="walk" asset="gameLib.WALK_SOUND" />
-	</m:group>	
-	
-	
-	<m:graphics id="jackCharacterGraphics" type="cell" bitmap="bitmaps.jack" area="0,0,400,120" cell="40,40" />
 
-	<m:graphics id="jackIconGraphics" type="cell" bitmap="bitmaps.jack" area="360,80,400,100" cell="20,20" />
+	<m:bitmap id="bitmap.tile.pave" asset="library.main.TILE_PAVE" />
+	
+	<m:bitmap id="bitmap.jack" asset="library.main.JACK_SPRITE_SHEET" />
+	
+	
+	
+	<m:sound id="sound.character.walk" asset="gameLib.WALK_SOUND" />
+	
+	
+	<m:graphics id="graphics.tile.pave" type="cell" bitmap="bitmap.tile.pave" area="0,0,400,120" cell="40,40" />
+	
+	<m:graphics id="graphics.jack.character" type="cell" bitmap="bitmap.jack" area="0,0,400,120" cell="40,40" />
+
+	<m:graphics id="graphics.jack.icons" type="cell" bitmap="bitmap.jack" area="360,80,400,100" cell="20,20" />
 	
 	<!-- m:graphics id="jackIconGraphics" type="range" name="JACK_CELLS_##" / -->
 	
 	
-	<m:group id="animations">
-		<m:group id="jack">
-			
-			<m:animation id="sleep" framerate="2">
-				<m:frame>
-					<m:graphic id="jackCharacterGraphics[19]" />
-				</m:frame>
-				<m:frame>
-					<m:graphic id="jackCharacterGraphics[25]" />
-				</m:frame>
-			</m:animation>
-			
-			
-			<m:animation id="snore" framerate="4" offset="0,-26">
-				<m:frame>
-					<m:graphic id="jackIconGraphics[0]" />
-				</m:frame>
-				<m:frame>
-					<m:graphic id="jackIconGraphics[1]" />
-				</m:frame>
-				<m:frame>
-					<m:graphic id="jackIconGraphics[2]" />
-				</m:frame>
-				<m:frame duration="2">
-					<m:graphic id="jackIconGraphics[3]" />
-				</m:frame>
-			</m:animation>
+	<m:animation id="animation.jack.sleep" framerate="8">
+		<m:frame graphic="graphics.jack.character[19]" />
+		<m:frame graphic="graphics.jack.character[25]" duration="2" />
+	</m:animation>
+		
+		
+	<m:animation id="animation.jack.snore" framerate="4" offset="0,-26">
+		<m:frame graphic="graphics.jack.character[0]" />
+		<m:frame graphic="graphics.jack.character[1]" />
+		<m:frame graphic="graphics.jack.character[2]" />
+		<m:frame graphic="graphics.jack.character[3]" />
+	</m:animation>
 			
 			
-			<m:group id="idle">
-				<m:animation id="south" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[0]" />
-					</m:frame> 
-				</m:animation>
-				
-				<m:animation id="north" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[3]" />
-					</m:frame> 
-				</m:animation>	
-			
-				<m:animation id="west" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[10]" />
-					</m:frame>
-				</m:animation>
-				
-				<m:animation id="east" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[13]" />
-					</m:frame>
-				</m:animation>
-			</m:group>
+		
+	<m:animation id="animation.jack.idle.south" framerate="8">
+		<m:frame graphic="graphics.jack.character[0]" />
+	</m:animation>
+	
+	<m:animation id="animation.jack.idle.north" framerate="8">
+		<m:frame graphic="graphics.jack.character[3]" />
+	</m:animation>	
+
+	<m:animation id="animation.jack.idle.west" framerate="8">
+		<m:frame graphic="graphics.jack.character[10]" />
+	</m:animation>
+	
+	<m:animation id="animation.jack.idle.south" framerate="8">
+		<m:frame graphic="graphics.jack.character[13]" />
+	</m:animation>
 			
 			
-			<m:group id="walk">
-				<m:animation id="south" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[1]" />
-					</m:frame>
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[2]" />
-					</m:frame>
-				</m:animation>
-				
-				<m:animation id="north" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[4]" />
-					</m:frame>
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[5]" />
-					</m:frame>
-				</m:animation>
-				
-				<m:animation id="west" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[11]" />
-					</m:frame> 
-					<m:frame>
-						<gm:raphic id="jackCharacterGraphics[12]" />
-					</m:frame> 
-				</m:animation>
-				
-				<m:animation id="east" framerate="8">
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[14]" />
-					</m:frame> 
-					<m:frame>
-						<m:graphic id="jackCharacterGraphics[15]" />
-					</m:frame> 
-				</m:animation>
-			</m:group>
-		</m:group>
-	</m:group>		
+	
+	<m:animation id="animation.jack.walk.south" framerate="8">
+		<m:frame graphic="graphics.jack.character[1]" />
+		<m:frame graphic="graphics.jack.character[2]" />
+	</m:animation>
+	
+	<m:animation id="animation.jack.idle.north" framerate="8">
+		<m:frame graphic="graphics.jack.character[4]" />
+		<m:frame graphic="graphics.jack.character[5]" />
+	</m:animation>
+	
+	<m:animation id="animation.jack.idle.west" framerate="8">
+		<m:frame graphic="graphics.jack.character[11]" />
+		<m:frame graphic="graphics.jack.character[12]" />
+	</m:animation>
+	
+	<m:animation id="animation.jack.idle.east" framerate="8">
+		<m:frame graphic="graphics.jack.character[14]" />
+		<m:frame graphic="graphics.jack.character[15]" />
+	</m:animation>
 	
 	
 	
@@ -134,62 +90,161 @@
 	
 
 	
-	<m:group id="sprites">
-		<m:sprite id="jack" defaultState="sprites.jack.idle.north">
-			<m:transform>
-				<!-- m:translate x="0" y="0" / -->
-				<!-- m:scale x="1.0" y="1.0" / -->
-				<!-- m:rotate angle="0" / -->
-			</m:transform>
-			
-			
-			<m:state id="sleep">
-				<m:animation id="animations.jack.sleep" />
-				<m:animation id="animations.jack.snore" />
+	<m:sprite id="sprites.jack" defaultState="sleep">
+		
+		<m:state id="sleep">
+			<m:instance id="sound.snore" />
+			<m:instance id="animation.jack.sleep" />
+			<m:instance id="animation.jack.snore" />
+		</m:state>
+		
+		
+		<m:state id="idle">
+			<m:state id="north">
+				<m:instance id="animation.jack.idle.north" />
 			</m:state>
-			
-			
-			<m:state id="idle">
-				<m:state id="north">
-					<m:animation id="animations.jack.idle.north" />
-				</m:state>
-				<m:state id="west">
-					<m:animation id="animations.jack.idle.west" />
-				</m:state> 
-				<m:state id="south">
-					<m:animation id="animations.jack.idle.south" />
-				</m:state> 
-				<m:state id="east">
-					<m:animation id="animations.jack.idle.east" />
-				</m:state> 
+			<m:state id="west">
+				<m:instance id="animation.jack.idle.west" />
+			</m:state> 
+			<m:state id="south">
+				<m:instance id="animation.jack.idle.south" />
+			</m:state> 
+			<m:state id="east">
+				<m:instance id="animation.jack.idle.east" />
+			</m:state> 
+		</m:state>
+		
+		
+		<m:state id="walk">
+			<m:instance id="sound.walk" />
+			<m:state id="north">
+				<m:instance id="animation.jack.walk.north" />
+			</m:state> 
+			<m:state id="west">
+				<m:instance id="animation.jack.walk.west" />
+			</m:state> 
+			<m:state id="south">
+				<m:instance id="animation.jack.walk.south" />
+			</m:state> 
+			<m:state id="east">
+				<m:instance id="animation.jack.walk.east" />
 			</m:state>
-			
-			<m:state id="walk">
-				<m:state id="north">
-					<m:animation id="animations.jack.walk.north" />
-					<m:sound id="sounds.walk" />
-				</m:state> 
-				<m:state id="west">
-					<m:animation id="animations.jack.walk.west" />
-					<m:sound id="sounds.walk" />
-				</m:state> 
-				<m:state id="south">
-					<m:animation id="animations.jack.walk.south" />
-					<m:sound id="sounds.walk" />
-				</m:state> 
-				<m:state id="east">
-					<m:animation id="animations.jack.walk.east" />
-					<m:sound id="sounds.walk" />
-				</m:state>
-			</m:state>
-		</m:sprite>
-	</m:group>	
+		</m:state>
+	</m:sprite>
 
 	
 	
-	<m:actor id="player" sprite="sprites.jack">
-		<m:behavior id="" />
+	<m:tween id="tween.character.fadeIn">
+		<m:keyframe time="0">
+			<m:property id="alpha" value="0.0" />
+			<m:property id="blur" value="0,10" />
+		</m:keyframe>
+		<m:keyframe time="0.25">
+			<m:property id="alpha" value="1.0" ease="Cubic.easeOut" />
+		</m:keyframe>
+		<m:keyframe time="1.0">
+			<m:property id="blur" value="0,0" ease="Cubic.easeIn" />
+		</m:keyframe>
+	</m:tween>
+	
+	
+	
+	<m:behaviour id="behaviour.player" className="demo.behaviour.Player" />
+	
+	
+	
+	<m:actor id="actor.player">
+		<m:behaviour id="behaviour.player" />
+		<m:instance id="sprite.jack" />
 	</m:actor>
+	
+	
+	<m:actor id="actor.ghost">
+		<m:instance id="sprite.jack" />
+	</m:actor>
+
+	
+	
+	<m:tiles id="tile.pave">
+		<!-- convex corners -->
+		<m:tile graphic="graphics.tile.pave[10]" /> <!-- top-left -->		
+		<m:tile graphic="graphics.tile.pave[12]" />	<!-- top-right  -->
+		<m:tile graphic="graphics.tile.pave[30]" />	<!-- bottom-left -->
+		<m:tile graphic="graphics.tile.pave[32]" />	<!-- bottom-right -->		
+		<!-- edges -->
+		<m:tile graphic="graphics.tile.pave[11]" />	<!-- top -->	
+		<m:tile graphic="graphics.tile.pave[20]" />	<!-- left -->	
+		<m:tile graphic="graphics.tile.pave[22]" />	<!-- right -->	
+		<m:tile graphic="graphics.tile.pave[31]" />	<!-- bottom -->
+		<!-- concave corners -->
+		<m:tile graphic="graphics.tile.pave[13]" />	<!-- top-left -->	
+		<m:tile graphic="graphics.tile.pave[14]" />	<!-- top-right -->
+		<m:tile graphic="graphics.tile.pave[23]" />	<!-- bottom-left -->	
+		<m:tile graphic="graphics.tile.pave[24]" />	<!-- bottom-right -->			
+		<!-- inner tiles -->
+		<m:tile graphic="graphics.tile.pave[0]" /> 
+		<m:tile graphic="graphics.tile.pave[1]" />
+		<m:tile graphic="graphics.tile.pave[2]" />
+		<m:tile graphic="graphics.tile.pave[3]" />
+		<m:tile graphic="graphics.tile.pave[21]" />
+	</m:tiles>
+	
+	
+	
+	<m:instance id="instance.actor.player" instance="actor.player" />
+	<m:instance id="instance.actor.fhost"
+	
+	
+	<m:map id="map.main" size="5,3">
+		<m:layer id="background">
+			<!-- row #0 -->
+			<m:cell instance="tile.pave[0]" />			
+			<m:cell instance="tile.pave[4]" />
+			<m:cell instance="tile.pave[4]" />
+			<m:cell instance="tile.pave[4]" />
+			<m:cell instance="tile.pave[3]" />
+			
+			<!-- row #1 -->
+			<m:cell instance="tile.pave[5]" />
+			<m:cell instance="tile.pave[12]" />
+			<m:cell instance="tile.pave[13]" />
+			<m:cell instance="tile.pave[14]" />
+			<m:cell instance="tile.pave[6]" />
+			
+			<!-- row #2 -->
+			<m:cell instance="tile.pave[2]" />
+			<m:cell instance="tile.pave[7]" />
+			<m:cell instance="tile.pave[7]" />
+			<m:cell instance="tile.pave[7]" />
+			<m:cell instance="tile.pave[3]" />
+		</m:layer>
+		
+		
+		<m:layer id="actors">
+			<!-- row #0 -->
+			<m:cell instance="" />			
+			<m:cell instance="actor.player" />
+			<m:cell instance="" />
+			<m:cell instance="" />
+			<m:cell instance="" />
+			
+			<!-- row #1 -->
+			<m:cell instance="" />
+			<m:cell instance="" />
+			<m:cell instance="" />
+			<m:cell instance="" />
+			<m:cell instance="" />
+			
+			<!-- row #2 -->
+			<m:cell instance="" />
+			<m:cell instance="" />
+			<m:cell instance="" />
+			<m:cell instance="actor.ghost" />
+			<m:cell instance="" />
+		</m:layer>
+		
+	</m:map>
+	
 	
 	
 </m:config>

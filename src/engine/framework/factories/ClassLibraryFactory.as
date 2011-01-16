@@ -3,6 +3,7 @@ package engine.framework.factories
 	import engine.framework.interfaces.IClassLibraryBuilder;
 	import engine.framework.interfaces.IConfig;
 	import engine.framework.interfaces.IObjectFactory;
+	import flash.utils.getDefinitionByName;
 	/**
 	 * ...
 	 * @author Luke Van In
@@ -31,7 +32,7 @@ package engine.framework.factories
 			
 			var className:String = config.getProperty("className");
 			
-			return this._builder.buildClassLibrary(className);
+			return this._builder.buildClassLibrary(getDefinitionByName(className) as Class);
 		}
 		
 	}

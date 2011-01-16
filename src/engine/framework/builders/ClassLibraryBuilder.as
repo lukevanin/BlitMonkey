@@ -17,9 +17,9 @@ package engine.framework.builders
 		}
 		
 		
-		public function buildClassLibrary(className:String):ILibrary
+		public function buildClassLibrary(classReference:Class):ILibrary
 		{
-			return new ClassLibraryAdapter(getDefinitionByName(className) as Class);
+			return new ClassLibraryAdapter(classReference);
 		}
 		
 	}
