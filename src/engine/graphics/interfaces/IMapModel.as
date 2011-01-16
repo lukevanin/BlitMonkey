@@ -1,6 +1,8 @@
 package engine.graphics.interfaces 
 {
 	import engine.common.interfaces.IGrid;
+	import engine.geometry.interfaces.ITransform;
+	import engine.geometry.interfaces.ITransformable;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
@@ -8,17 +10,37 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IMapModel extends IGrid, IGraphicModel
+	public interface IMapModel
 	{
 		
 		function get offset():Point;
 		
-		function set offset(offset:Point):void;
+		function set offset(offset:Point):void; // where the view is relative to the map
 		
 		
-		//function get dimensions():Point;
+		function set gridSize(gridSize:Point):void;
 		
-		//function set dimensions(dimensions:Point):void;
+		function get gridSize():Point;
+				
+		
+		function set displaySize(displaySize:Point):void
+		
+		function get displaySize():Point;
+		
+		
+		function get rows():int;
+		
+		function get columns():int;
+	
+		
+		function get transform():ITransform; // where the map is drawn on the screen
+		
+		
+		
+		function setIndex(x:int, y:int, index:int):void;
+		
+		function getIndex(x:int, y:int):int;
+	
 		
 	}
 	

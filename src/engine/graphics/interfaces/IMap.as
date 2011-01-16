@@ -8,12 +8,22 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IMap extends IGrid, IGraphic
+	public interface IMap extends IGraphic
 	{
 		
-		function get offset():Point;
+		function get columns():int;
 		
-		function set offset(offset:Point):void;
+		function get rows():int;
+		
+		
+		function setIndex(column:int, row:int, index:int):void;
+		
+		function getIndex(column:int, row:int):int;
+		
+		
+		function offsetBy(p:Point):void;
+		
+		function offsetTo(p:Point):void;
 		
 	}
 	

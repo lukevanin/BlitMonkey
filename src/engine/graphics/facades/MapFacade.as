@@ -1,9 +1,12 @@
 package engine.graphics.facades 
 {
 	import engine.common.interfaces.IGrid;
+	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IGraphic;
+	import engine.graphics.interfaces.IGraphicView;
 	import engine.graphics.interfaces.IIndexableGraphic;
 	import engine.graphics.interfaces.IMap;
+	import engine.graphics.interfaces.IMapController;
 	import engine.graphics.interfaces.IMapModel;
 	import engine.graphics.interfaces.IRenderContext;
 	import flash.geom.Point;
@@ -16,63 +19,71 @@ package engine.graphics.facades
 	{
 		private var _model:IMapModel;
 		
-		private var _graphic:IGraphic;
+		private var _view:IGraphicView;
 		
-		//private var _graphic:IIndexableGraphic;
-		
-		//private var _dimensions:Point;
-		
-		
-
-		//public function get dimensions():Point
-		//{
-			//return this._dimensions;
-		//}
+		private var _controller:IMapController;		
 		
 		
 		
-		public function get offset():Point
+		public function get columns():int 
 		{
-			return this._model.offset;
+			return this._model.columns;
 		}
 		
-		public function set offset(offset:Point):void
+		public function get rows():int 
 		{
-			this._model.offset = offset;
+			return this._model.rows;
 		}
 		
 		
 		
-		public function MapFacade(model:IMapModel, graphic:IGraphic) 
+		public function get size():Point
 		{
-			//this._graphic = graphic;
-			
+			return this._view.size;
+		}
+		
+		
+		public function MapFacade(model:IMapModel, view:IGraphicView, controller:IMapController) 
+		{
 			this._model = model;
 			
-			this._graphic = graphic;
+			this._view = view;
 			
-			//this._dimensions = dimensions;
+			this._controller = controller;
+		}
+
+		
+		
+		
+
+
+		public function offsetBy(p:Point):void 
+		{
+			this._controller.offsetBy(p);
+		}
+		
+		public function offsetTo(p:Point):void 
+		{
+			this._controller.offsetTo(p);
 		}
 		
 
 		
-		public function setItemAt(item:*, position:Point):void 
+		public function setIndex(x:int, y:int, index:int):void 
 		{
-			this._model.setItemAt(item, position);
+			this._model.setIndex(x, y, index);
 		}
 		
-		public function getItemAt(position:Point):* 
+		public function getIndex(x:int, y:int):int 
 		{
-			return this._model.getItemAt(position);
+			return this._model.getIndex(x, y);
 		}
 		
 		
-		
-		public function draw(renderContext:IRenderContext, position:Point):void
+		public function draw(renderContext:IRenderContext):void
 		{
 			this._view.draw(renderContext);
 		}
-		
 		
 		
 	}

@@ -1,5 +1,6 @@
 package engine.graphics.contexts 
 {
+	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IRenderContext;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -24,9 +25,14 @@ package engine.graphics.contexts
 		
 
 		
-		public function blit(bitmap:BitmapData, sourceArea:Rectangle, destinationPoint:Point):void 
+		/*public function blit(bitmap:BitmapData, sourceArea:Rectangle, destinationPoint:Point):void 
 		{
 			this._canvas.bitmapData.copyPixels(bitmap, sourceArea, destinationPoint, null, null, true);
+		}*/
+		
+		public function blit(bitmap:BitmapData, sourceArea:Rectangle, transform:ITransform):void 
+		{
+			this._canvas.bitmapData.copyPixels(bitmap, sourceArea, transform.position, null, null, true);
 		}
 		
 		

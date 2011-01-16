@@ -1,5 +1,6 @@
 package engine.graphics.interfaces 
 {
+	import engine.geometry.interfaces.ITransformable;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
@@ -7,7 +8,7 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IBitmapModel extends IGraphicModel
+	public interface IBitmapModel extends ITransformable
 	{
 		
 		function get area():Rectangle;

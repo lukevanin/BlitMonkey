@@ -1,7 +1,7 @@
 package engine.graphics.interfaces 
 {
+	import engine.geometry.interfaces.ITransform;
 	import flash.display.BitmapData;
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	/**
@@ -11,7 +11,7 @@ package engine.graphics.interfaces
 	public interface IRenderContext
 	{
 		
-		function blit(bitmap:BitmapData, sourceArea:Rectangle, destinationPoint:Point):void;
+		function blit(bitmap:BitmapData, sourceArea:Rectangle, transform:ITransform):void;
 		
 	}
 	

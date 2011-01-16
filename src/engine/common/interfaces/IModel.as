@@ -1,14 +1,13 @@
 package engine.common.interfaces 
 {
+
 	
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IObserver 
+	public interface IModel extends IObservable, IDisposable
 	{
-		
-		function notify(subject:IObservable):void;
 		
 	}
 	

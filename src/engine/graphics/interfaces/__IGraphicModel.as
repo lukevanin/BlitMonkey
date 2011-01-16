@@ -6,7 +6,7 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IGraphicModel 
+	public interface __IGraphicModel 
 	{
 		
 		function get position():Point;

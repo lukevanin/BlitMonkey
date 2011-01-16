@@ -1,6 +1,7 @@
 package engine.graphics.models 
 {
 	import engine.common.interfaces.IGrid;
+	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IMapModel;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -16,24 +17,17 @@ package engine.graphics.models
 		
 		private var _offset:Point;
 		
+		private var _gridSize:Point;
 		
-		/*public function get area():Rectangle 
-		{
-			return this._area.clone();
-		}*/
+		private var _displaySize:Point;
 		
-		/*public function set area(area:Rectangle):void 
-		{
-			this._area.x = area.x;
-			
-			this._area.y = area.y;
-		}*/
+		private var _transform:ITransform;
+		
 		
 		
 		public function set offset(offset:Point):void
 		{
 			this._offset.x = offset.x;
-			
 			this._offset.y = offset.y;
 		}
 		
@@ -43,30 +37,74 @@ package engine.graphics.models
 		}
 		
 		
-		public function get dimensions():Point 
+		
+		public function set gridSize(gridSize:Point):void
 		{
-			return this._grid.dimensions;
+			this._gridSize.x = gridSize.x;
+			this._gridSize.y = gridSize.y;
+		}
+		
+		public function get gridSize():Point
+		{
+			return this._gridSize;
 		}
 		
 		
-		//public function MapModel(grid:IGrid, area:Rectangle) 
-		public function MapModel(grid:IGrid, offset:Point) 
+		
+		public function set displaySize(displaySize:Point):void
 		{
-			this._grid = grid;
+			this._displaySize.x = displaySize.x;
+			this._displaySize.y = displaySize.y;
+		}
+		
+		public function get displaySize():Point
+		{
+			return this._displaySize.clone();
+		}
+		
+		
+		public function get columns():int
+		{
+			return this._grid.columns;
+		}
+		
+		public function get rows():int
+		{
+			return this._grid.rows;
+		}
+		
+		
+		
+		public function get transform():ITransform
+		{
+			return this._transform;
+		}
+		
+		
+		
+		public function MapModel(grid:IGrid, offset:Point, gridSize:Point, displaySize:Point, transform:ITransform) 
+		{
+			this._grid = grid.clone();
 			
-			//this._area = area;
-			this._offset = offset;
+			this._offset = offset.clone();
+			
+			this._gridSize = gridSize.clone();
+			
+			this._displaySize = displaySize.clone();
+			
+			this._transform = transform.clone();
 		}
 		
 		
-		public function setItemAt(item:*, position:Point):void 
+		public function setIndex(column:int, row:int, index:int):void 
 		{
-			this._grid.setItemAt(item, position);
+			this._grid.setItem(column, row, index);
 		}
 		
-		public function getItemAt(position:Point):* 
+		
+		public function getIndex(column:int, row:int):int
 		{
-			return this._grid.getItemAt(position);
+			return this._grid.getItem(column, row);
 		}
 		
 	}

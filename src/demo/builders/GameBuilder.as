@@ -3,7 +3,10 @@ package demo.builders
 	import demo.facades.GameFacade;
 	import demo.libraries.GameLib;
 	import engine.common.Collection;
+	import engine.common.Grid;
 	import engine.common.interfaces.ICollection;
+	import engine.common.interfaces.IGrid;
+	import engine.common.interfaces.ITileset;
 	import engine.common.utils.BitmapUtil;
 	import engine.common.utils.TimeUtil;
 	import engine.framework.interfaces.IGame;
@@ -13,6 +16,8 @@ package demo.builders
 	import engine.graphics.builders.CanvasBuilder;
 	import engine.graphics.builders.CellBitmapBuilder;
 	import engine.graphics.builders.IndexableGraphicAnimationBuilder;
+	import engine.graphics.builders.MapBuilder;
+	import engine.graphics.builders.TilesetBuilder;
 	import engine.graphics.contexts.CanvasRenderContext;
 	import engine.graphics.facades.IndexableGraphicAnimationFrameFacade;
 	import engine.graphics.interfaces.IAnimation;
@@ -20,10 +25,9 @@ package demo.builders
 	import engine.graphics.interfaces.ICanvas;
 	import engine.graphics.interfaces.ICanvasBuilder;
 	import engine.graphics.interfaces.ICellBitmapBuilder;
-	import engine.graphics.interfaces.IGraphicModel;
 	import engine.graphics.interfaces.IIndexableGraphic;
+	import engine.graphics.interfaces.IMap;
 	import engine.graphics.interfaces.IRenderContext;
-	import engine.graphics.models.GraphicModel;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -66,19 +70,23 @@ package demo.builders
 			var stageArea:Rectangle = new Rectangle(0, 0, 320, 200);
 			
 			
-			var tileBitmapData:BitmapData = BitmapUtil.getBitmapData(new GameLib.TILE_PAVE());
+			var paveBitmapData:BitmapData = BitmapUtil.getBitmapData(new GameLib.TILE_PAVE());
 			
 			var characterBitmapData:BitmapData = BitmapUtil.getBitmapData(new GameLib.JACK_SPRITE_SHEET());
 			
 			
-			var bitmapBuilder:BitmapBuilder = new BitmapBuilder();
+			//var bitmapBuilder:BitmapBuilder = new BitmapBuilder();
 			
 			//var bitmap:IBitmap = bitmapBuilder.buildBitmap(characterBitmapData);
 			
 			
-			var cellBitmapBuilder:CellBitmapBuilder = new CellBitmapBuilder();
+			//var cellBitmapBuilder:CellBitmapBuilder = new CellBitmapBuilder();
 			
-			var tileGraphic:IIndexableGraphic = cellBitmapBuilder.buildCellBitmap(tileBitmapData, new Point(40, 40));
+			//var tileGraphic:IIndexableGraphic = cellBitmapBuilder.buildCellBitmap(tileBitmapData, new Point(40, 40));
+			
+			//var tileGraphics:ICollection = new Collection();
+			
+			//tileGraphics.addItem(bitmapBuilder.buildBitmap(tileBitmapData, new Rectangle(0, 0, 40, 40)));
 			
 			
 			
@@ -86,50 +94,40 @@ package demo.builders
 			//var characterGraphic:IIndexableGraphic = cellBitmapBuilder.buildCellBitmap(characterBitmapData, new Point(40, 40), characterGraphicModel);
 
 			
-			var characterSouthGraphicModel:IGraphicModel = new GraphicModel(new Point());
+			//var characterSouthGraphicModel:IGraphicModel = new GraphicModel(new Point());
 			
-			var walkSouthFrames:ICollection = new Collection();
+			//var walkSouthFrames:ICollection = new Collection();
 			
-			walkSouthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterSouthGraphicModel, new Rectangle(40, 0, 40, 40)));
+			//walkSouthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, new Rectangle(40, 0, 40, 40), characterSouthGraphicModel));
 			
-			walkSouthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterSouthGraphicModel, new Rectangle(80,0,40,40)));
+			//walkSouthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, new Rectangle(80,0,40,40), characterSouthGraphicModel));
 			
-			var walkSouthAnimation:IAnimation = new AnimationBuilder().buildAnimation(walkSouthFrames, 15, characterSouthGraphicModel);
+			//var walkSouthAnimation:IAnimation = new AnimationBuilder().buildAnimation(walkSouthFrames, 15, characterSouthGraphicModel);
 
 			
-			var characterNorthGraphicModel:IGraphicModel = new GraphicModel(new Point());
+			//var characterNorthGraphicModel:IGraphicModel = new GraphicModel(new Point());
 			
-			var walkNorthFrames:ICollection = new Collection();
+			//var walkNorthFrames:ICollection = new Collection();
 			
-			walkNorthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterNorthGraphicModel, new Rectangle(160, 0, 40, 40)));
+			//walkNorthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, new Rectangle(160, 0, 40, 40), characterNorthGraphicModel));
 			
-			walkNorthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, characterNorthGraphicModel, new Rectangle(200,0,40,40)));
+			//walkNorthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, new Rectangle(200,0,40,40), characterNorthGraphicModel));
 			
-			var walkNorthAnimation:IAnimation = new AnimationBuilder().buildAnimation(walkNorthFrames, 15, characterNorthGraphicModel);
+			//var walkNorthAnimation:IAnimation = new AnimationBuilder().buildAnimation(walkNorthFrames, 15, characterNorthGraphicModel);
 			
 			
-		
-			/*var grid:IGrid = new Grid(new Point(5, 3));
 			
-			grid.setItemAt(10, new Point(0, 0));
-			grid.setItemAt(11, new Point(1, 0));
-			grid.setItemAt(11, new Point(2, 0));
-			grid.setItemAt(11, new Point(3, 0));
-			grid.setItemAt(12, new Point(4, 0));
+			var paveTileset:ITileset = new TilesetBuilder().buildTileset(paveBitmapData, new Point(40, 40));
 			
-			grid.setItemAt(20, new Point(0, 1));
-			grid.setItemAt(21, new Point(1, 1));
-			grid.setItemAt(21, new Point(2, 1));
-			grid.setItemAt(21, new Point(3, 1));
-			grid.setItemAt(22, new Point(4, 1));
 			
-			grid.setItemAt(30, new Point(0, 2));
-			grid.setItemAt(31, new Point(1, 2));
-			grid.setItemAt(31, new Point(2, 2));
-			grid.setItemAt(31, new Point(3, 2));
-			grid.setItemAt(32, new Point(4, 2));*/
-			
-			//var map:IMap = new MapBuilder().buildMap(tileGraphic, grid, new Point(70, 70));
+
+			var mapGrid:IGrid = Grid.fromArray([
+					[10, 11, 11, 11, 12],
+					[20, 21, 21, 21, 22],
+					[30, 31, 31, 31, 32]
+				]);  			
+						
+			var map:IMap = new MapBuilder().buildMap(mapGrid, paveTileset, new Point(70, 70), new Point(40, 40));
 			
 			
 			var canvasBuilder:ICanvasBuilder = new CanvasBuilder();
@@ -150,27 +148,30 @@ package demo.builders
 			
 			//animation.draw(renderContext, new Point(80, 80));
 			
-			walkNorthAnimation.position = new Point(120, 200);
+			//walkNorthAnimation.position = new Point(120, 200);
 			
-			walkNorthAnimation.play();
+			//walkNorthAnimation.play();
 			
 			
-			walkSouthAnimation.position = new Point(40, 0);
+			//walkSouthAnimation.position = new Point(40, 0);
 			
-			walkSouthAnimation.play();
+			//walkSouthAnimation.play();
 			
 			this._container.addEventListener(Event.ENTER_FRAME, function(e:Event):void { 
 					//map.offset = new Point(map.offset + 1, 0);
-					//map.draw(renderContext, new Point(40, 40));
-					canvas.clear();
 					
-					walkSouthAnimation.position = new Point(walkSouthAnimation.position.x, walkSouthAnimation.position.y + 1);
-					walkSouthAnimation.update(TimeUtil.getSeconds()); 
-					walkSouthAnimation.draw(renderContext); 
+					map.offsetBy(new Point(-1, -1));
+					map.draw(renderContext);
+					
+					//canvas.clear();
+					
+					//walkSouthAnimation.position = new Point(walkSouthAnimation.position.x, walkSouthAnimation.position.y + 1);
+					//walkSouthAnimation.update(TimeUtil.getSeconds()); 
+					//walkSouthAnimation.draw(renderContext); 
 				
-					walkNorthAnimation.position = new Point(walkNorthAnimation.position.x, walkNorthAnimation.position.y - 1);
-					walkNorthAnimation.update(TimeUtil.getSeconds()); 
-					walkNorthAnimation.draw(renderContext); 
+					//walkNorthAnimation.position = new Point(walkNorthAnimation.position.x, walkNorthAnimation.position.y - 1);
+					//walkNorthAnimation.update(TimeUtil.getSeconds()); 
+					//walkNorthAnimation.draw(renderContext); 
 				} );
 			
 			this._container.addChild(canvas as DisplayObject);

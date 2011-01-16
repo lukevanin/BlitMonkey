@@ -9,12 +9,16 @@ package engine.common.interfaces
 	public interface IGrid 
 	{
 		
-		function get dimensions():Point;
+		function get columns():int;
 		
-		function setItemAt(item:*, position:Point):void;
+		function get rows():int;
 		
-		function getItemAt(position:Point):*;
-	
+		function setItem(column:int, row:int, item:*):void;
+		
+		function getItem(column:int, row:int):*;
+		
+		function clone():IGrid;
+		
 	}
 	
 }

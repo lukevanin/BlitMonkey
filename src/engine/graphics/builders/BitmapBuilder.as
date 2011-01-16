@@ -8,8 +8,10 @@ package engine.graphics.builders
 	import engine.graphics.interfaces.IBitmapModel;
 	import engine.graphics.interfaces.IGraphicModel;
 	import engine.graphics.interfaces.IGraphicView;
+	import engine.graphics.interfaces.ITransform;
 	import engine.graphics.models.BitmapModel;
 	import engine.graphics.models.GraphicModel;
+	import engine.graphics.models.TransformModel;
 	import engine.graphics.views.BitmapView;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -17,6 +19,7 @@ package engine.graphics.builders
 	import flash.display.IBitmapDrawable;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.geom.Transform;
 	/**
 	 * ...
 	 * @author Luke Van In
@@ -30,17 +33,17 @@ package engine.graphics.builders
 		}
 		
 		
-		public function buildBitmap(source:IBitmapDrawable, graphicModel:IGraphicModel = null, area:Rectangle = null):IBitmap
+		public function buildBitmap(source:IBitmapDrawable, area:Rectangle = null, transform:ITransform = null):IBitmap
 		{
 			var bitmapData:BitmapData = BitmapUtil.getBitmapData(source);
 			
-			if (graphicModel == null)
-				graphicModel = new GraphicModel(new Point());
+			if (transform == null)
+				transform = new Transform();
 			
 			if (area == null)
 				area = bitmapData.rect;
 				
-			var model:IBitmapModel = new BitmapModel(graphicModel, area);
+			var model:IBitmapModel = new BitmapModel(transform, area);
 			
 			var view:IGraphicView = new BitmapView(bitmapData, model);
 				

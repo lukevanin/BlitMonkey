@@ -1,5 +1,6 @@
 package engine.graphics.models 
 {
+	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IBitmapModel;
 	import engine.graphics.interfaces.IGraphicModel;
 	import flash.geom.Point;
@@ -11,7 +12,7 @@ package engine.graphics.models
 	public class BitmapModel implements IBitmapModel
 	{
 		
-		private var _graphic:IGraphicModel;
+		private var _transform:ITransform;
 		
 		private var _area:Rectangle;
 		
@@ -34,22 +35,22 @@ package engine.graphics.models
 		}
 		
 		
-		public function get position():Point 
+		public function get transform():ITransform 
 		{
-			return this._graphic.position;
+			return this._transform;
 		}
 		
-		public function set position(position:Point):void 
+		/*public function set transform(transform:ITransform):void 
 		{
-			this._graphic.position = position;
-		}
+			this._transform = transform;
+		}*/
 		
 		
-		public function BitmapModel(graphic:IGraphicModel, area:Rectangle) 
+		public function BitmapModel(transform:ITransform, area:Rectangle) 
 		{
-			this._graphic = graphic;
+			this._transform = transform.clone();
 			
-			this._area = area;
+			this._area = area.clone();
 		}
 		
 		

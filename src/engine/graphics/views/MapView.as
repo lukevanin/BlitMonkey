@@ -1,63 +1,68 @@
 package engine.graphics.views 
 {
+	import engine.common.interfaces.ITileset;
+	import engine.common.interfaces.IView;
+	import engine.geometry.interfaces.ITransform;
+	import engine.geometry.Transform;
 	import engine.graphics.interfaces.IGraphic;
 	import engine.graphics.interfaces.IGraphicView;
 	import engine.graphics.interfaces.IIndexableGraphic;
 	import engine.graphics.interfaces.IMapModel;
 	import engine.graphics.interfaces.IRenderContext;
+	import flash.events.Event;
 	import flash.geom.Point;
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class MapView implements IGraphic
+	public class MapView implements IGraphicView
 	{
 		
 		private var _model:IMapModel;
 		
-		private var _graphic:IIndexableGraphic;
+		private var _tileset:ITileset;
 		
 		
-		public function MapView(model:IMapModel, graphic:IIndexableGraphic) 
+		
+		public function get size():Point
+		{
+			return this._model.displaySize;
+		}
+		
+		
+		
+		public function MapView(model:IMapModel, tileset:ITileset) 
 		{
 			this._model = model;
 			
-			this._graphic = graphic;
+			this._tileset = tileset;
 		}
 		
 		
 		
 		public function draw(renderContext:IRenderContext):void
 		{
-			var p:Point = new Point();
-			
 			// TODO: optimise (only render tiles and portions of tiles within the area)
-			for (p.y = 0; p.y < this._model.dimensions.y; p.y++)
+
+			for (var y:int = 0; y < this._model.rows; y++)
 			{
-				for (p.x = 0; p.x < this._model.dimensions.x; p.x++)
-					this.renderTile(renderContext, this._model.position.add(this.calculatePositionAt(p)), this._model.getItemAt(p));
+				for (var x:int = 0; x < this._model.columns; x++)
+					this._tileset.draw(renderContext, this.calculatePosition(x, y), this._model.getIndex(x, y));
 			}
 		}
 		
 		
 		
-		private function calculatePositionAt(p:Point):Point
+		private function calculatePosition(x:int, y:int):ITransform
 		{
-			var x:Number = (p.x - this._model.offset.x) * this._model.size.x;
+			var px:Number = (x * this._model.gridSize.x) - this._model.offset.x;
 			
-			var y:Number = (p.y - this._model.offset.y) * this._model.size.y;
+			var py:Number = (y * this._model.gridSize.y) - this._model.offset.y;
 			
-			return new Point(x, y);
+			return new Transform(new Point(px, py));
 		}
 		
 		
-		
-		private function renderTile(renderContext:IRenderContext, position:Point, index:int):void
-		{
-			this._graphic.index = index;
-			
-			this._graphic.draw(renderContext, position)
-		}
 		
 		
 	}

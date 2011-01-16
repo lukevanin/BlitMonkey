@@ -5,10 +5,8 @@ package engine.common.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IObserver 
+	public interface IView implements IObserver, IObservable, IDisposable
 	{
-		
-		function notify(subject:IObservable):void;
 		
 	}
 	
