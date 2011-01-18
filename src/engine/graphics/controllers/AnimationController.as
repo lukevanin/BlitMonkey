@@ -69,7 +69,7 @@ package engine.graphics.controllers
 			
 			//return Math.floor(frameNumber % this._model.numItems);
 			
-			return Math.floor(((t - this._startTime) * this._model.framesPerSecond) % this._model.numItems);
+			return Math.floor(((t - this._startTime) * this._model.framesPerSecond) % this._model.numFrames);
 		}
 		
 		

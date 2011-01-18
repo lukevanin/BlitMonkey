@@ -17,6 +17,8 @@ package engine.common.interfaces
 		function removeItemAt(index:int):*;
 		
 		
+		function clone():ICollection;
+		
 		//function getIterator():IIterable;
 		
 	}

@@ -11,12 +11,12 @@ package demo.builders
 	import engine.common.utils.TimeUtil;
 	import engine.framework.interfaces.IGame;
 	import engine.framework.interfaces.IGameBuilder;
-	import engine.graphics.builders.AnimationBuilder;
+	import engine.graphics.builders.TilesetAnimationBuilder;
 	import engine.graphics.builders.BitmapBuilder;
 	import engine.graphics.builders.CanvasBuilder;
 	import engine.graphics.builders.CellBitmapBuilder;
 	import engine.graphics.builders.IndexableGraphicAnimationBuilder;
-	import engine.graphics.builders.MapBuilder;
+	import engine.graphics.builders.TilesetMapBuilder;
 	import engine.graphics.builders.TilesetBuilder;
 	import engine.graphics.contexts.CanvasRenderContext;
 	import engine.graphics.facades.IndexableGraphicAnimationFrameFacade;
@@ -75,6 +75,11 @@ package demo.builders
 			var characterBitmapData:BitmapData = BitmapUtil.getBitmapData(new GameLib.JACK_SPRITE_SHEET());
 			
 			
+			var paveTileset:ITileset = new TilesetBuilder().buildTileset(paveBitmapData, new Point(40, 40));
+			
+			var characterTileset:ITileset = new TilesetBuilder().buildTileset(characterBitmapData, new Point(40, 40));
+			
+			
 			//var bitmapBuilder:BitmapBuilder = new BitmapBuilder();
 			
 			//var bitmap:IBitmap = bitmapBuilder.buildBitmap(characterBitmapData);
@@ -113,11 +118,14 @@ package demo.builders
 			
 			//walkNorthFrames.addItem(bitmapBuilder.buildBitmap(characterBitmapData, new Rectangle(200,0,40,40), characterNorthGraphicModel));
 			
-			//var walkNorthAnimation:IAnimation = new AnimationBuilder().buildAnimation(walkNorthFrames, 15, characterNorthGraphicModel);
+			
+
+			
+			var walkNorthAnimation:IAnimation = new TilesetAnimationBuilder(characterTileset).buildAnimation(Collection.fromArray([4, 5]), 8);
+			
+			var walkSouthAnimation:IAnimation = new TilesetAnimationBuilder(characterTileset).buildAnimation(Collection.fromArray([1, 2]), 8);
 			
 			
-			
-			var paveTileset:ITileset = new TilesetBuilder().buildTileset(paveBitmapData, new Point(40, 40));
 			
 			
 
@@ -127,7 +135,7 @@ package demo.builders
 					[30, 31, 31, 31, 32]
 				]);  			
 						
-			var map:IMap = new MapBuilder().buildMap(mapGrid, paveTileset, new Point(70, 70), new Point(40, 40));
+			var map:IMap = new TilesetMapBuilder(paveTileset).buildMap(mapGrid, new Point(70, 70), new Point(40, 40));
 			
 			
 			var canvasBuilder:ICanvasBuilder = new CanvasBuilder();
@@ -148,6 +156,7 @@ package demo.builders
 			
 			//animation.draw(renderContext, new Point(80, 80));
 			
+			
 			//walkNorthAnimation.position = new Point(120, 200);
 			
 			//walkNorthAnimation.play();
@@ -155,19 +164,19 @@ package demo.builders
 			
 			//walkSouthAnimation.position = new Point(40, 0);
 			
-			//walkSouthAnimation.play();
+			walkSouthAnimation.play();
 			
 			this._container.addEventListener(Event.ENTER_FRAME, function(e:Event):void { 
 					//map.offset = new Point(map.offset + 1, 0);
 					
-					map.offsetBy(new Point(-1, -1));
+					//map.offsetBy(new Point(-1, -1));
 					map.draw(renderContext);
 					
 					//canvas.clear();
 					
 					//walkSouthAnimation.position = new Point(walkSouthAnimation.position.x, walkSouthAnimation.position.y + 1);
-					//walkSouthAnimation.update(TimeUtil.getSeconds()); 
-					//walkSouthAnimation.draw(renderContext); 
+					walkSouthAnimation.update(TimeUtil.getSeconds()); 
+					walkSouthAnimation.draw(renderContext); 
 				
 					//walkNorthAnimation.position = new Point(walkNorthAnimation.position.x, walkNorthAnimation.position.y - 1);
 					//walkNorthAnimation.update(TimeUtil.getSeconds()); 

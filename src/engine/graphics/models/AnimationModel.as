@@ -2,10 +2,10 @@ package engine.graphics.models
 {
 	import engine.common.Collection;
 	import engine.common.interfaces.ICollection;
+	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IAnimationFrame;
 	import engine.graphics.interfaces.IAnimationModel;
 	import engine.graphics.interfaces.ICells;
-	import engine.graphics.interfaces.IGraphicModel;
 	import flash.geom.Point;
 	/**
 	 * ...
@@ -14,7 +14,7 @@ package engine.graphics.models
 	public class AnimationModel implements IAnimationModel
 	{
 		
-		private var _graphic:IGraphicModel;
+		private var _transform:ITransform;
 		
 		private var _isPlaying:Boolean;
 		
@@ -26,14 +26,20 @@ package engine.graphics.models
 		
 		
 		
-		public function get position():Point
+		/*public function get position():Point
 		{
 			return this._graphic.position;
-		}
+		}*/
 		
-		public function set position(position:Point):void
+		/*public function set position(position:Point):void
 		{
 			this._graphic.position = position;
+		}*/
+		
+		
+		public function get transform():ITransform
+		{
+			return this._transform;
 		}
 		
 		
@@ -68,24 +74,18 @@ package engine.graphics.models
 		
 		
 		
-		/*public function get numFrames():int 
-		{
-			return this._frames.length;
-		}*/
-		
-		
-		public function get numItems():int 
+		public function get numFrames():int 
 		{
 			return this._frames.numItems;
 		}
 		
 		
 		
-		public function AnimationModel(graphic:IGraphicModel, frames:ICollection, framesPerSecond:int, currentFrame:int = 0, isPlaying:Boolean = false) 
+		public function AnimationModel(transform:ITransform, frames:ICollection, framesPerSecond:int, currentFrame:int = 0, isPlaying:Boolean = false) 
 		{
-			this._graphic = graphic;
+			this._transform = transform.clone();
 			
-			this._frames = frames;
+			this._frames = frames.clone();
 			
 			this._framesPerSecond = framesPerSecond;
 			
@@ -96,20 +96,20 @@ package engine.graphics.models
 		
 
 		
-		public function addItem(item:*):void 
+		/*public function addItem(item:*):void 
 		{
 			this._frames.addItem(item);
-		}
+		}*/
 		
-		public function getItemAt(index:int):* 
+		public function getFrame(index:int):* 
 		{
 			return this._frames.getItemAt(index);
 		}
 		
-		public function removeItemAt(index:int):* 
+		/*public function removeItemAt(index:int):* 
 		{
 			return this._frames.removeItemAt(index);
-		}
+		}*/
 
 		
 		

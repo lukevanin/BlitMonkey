@@ -2,7 +2,10 @@ package engine.graphics.builders
 {
 	import engine.common.errors.BuildError;
 	import engine.common.interfaces.ICollection;
+	import engine.common.interfaces.ITileset;
 	import engine.common.utils.TestUtil;
+	import engine.geometry.interfaces.ITransform;
+	import engine.geometry.Transform;
 	import engine.graphics.controllers.AnimationController;
 	import engine.graphics.facades.AnimationFacade;
 	import engine.graphics.interfaces.IAnimation;
@@ -10,25 +13,27 @@ package engine.graphics.builders
 	import engine.graphics.interfaces.IAnimationController;
 	import engine.graphics.interfaces.IAnimationFrame;
 	import engine.graphics.interfaces.IAnimationModel;
-	import engine.graphics.interfaces.IGraphicModel;
 	import engine.graphics.interfaces.IGraphicView;
 	import engine.graphics.models.AnimationModel;
-	import engine.graphics.views.AnimationView;
+	import engine.graphics.views.TilesetAnimationView;
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class AnimationBuilder
+	public class TilesetAnimationBuilder
 	{
 		
-		public function AnimationBuilder() 
+		private var _tileset:ITileset;
+		
+		
+		public function TilesetAnimationBuilder(tileset:ITileset) 
 		{
-			
+			this._tileset = tileset;
 		}
 		
 		
 		
-		public function buildAnimation(frames:ICollection, framesPerSecond:int, graphicModel:IGraphicModel, currentFrame:int = 0, isPlaying:Boolean = false):IAnimation
+		public function buildAnimation(frames:ICollection, framesPerSecond:int, currentFrame:int = 0, isPlaying:Boolean = false, transform:ITransform = null):IAnimation
 		{
 			TestUtil.assert("number of frames must be greater than 0", frames.numItems > 0);
 			
@@ -36,9 +41,12 @@ package engine.graphics.builders
 			
 			TestUtil.assert("current frame " + currentFrame + " out of range " + frames.numItems, (currentFrame >= 0) && (currentFrame < frames.numItems));
 			
-			var model:IAnimationModel = new AnimationModel(graphicModel, frames, framesPerSecond, currentFrame, isPlaying);
+			if (transform == null)
+				transform = new Transform();
+			
+			var model:IAnimationModel = new AnimationModel(transform, frames, framesPerSecond, currentFrame, isPlaying);
 
-			var view:IGraphicView = new AnimationView(model);
+			var view:IGraphicView = new TilesetAnimationView(model, this._tileset);
 			
 			var controller:IAnimationController = new AnimationController(model);
 			

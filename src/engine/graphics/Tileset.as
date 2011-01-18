@@ -18,10 +18,20 @@ package engine.graphics
 		private var _tiles:Vector.<ITile>;
 		
 		
+
+		
 		public function Tileset(tiles:Vector.<ITile>) 
 		{
 			this._tiles = tiles;
 		}
+		
+		
+		
+		public function getSize(index:int):Point
+		{
+			return this._tiles[index].size;
+		}
+		
 		
 
 		public function draw(renderContext:IRenderContext, transform:ITransform, index:int):void 

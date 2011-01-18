@@ -1,12 +1,13 @@
 package engine.graphics.interfaces 
 {
 	import engine.common.interfaces.ICollection;
+	import engine.geometry.interfaces.ITransform;
 	
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IAnimationModel extends IGraphicModel, ICollection
+	public interface IAnimationModel
 	{
 		
 		function get isPlaying():Boolean;
@@ -19,17 +20,16 @@ package engine.graphics.interfaces
 		function set currentFrame(currentFrame:int):void;
 		
 		
-		//function get numFrames():int;
-		
-		
 		function get framesPerSecond():int;
 		
-		//function set framesPerSecond(framesPerSecond:int):void;
+		
+		function get transform():ITransform;
 		
 		
-		//function addFrame(frame:IAnimationFrame):void;
+		function get numFrames():int;
 		
-		//function getFrameAt(index:int):IAnimationFrame;
+		
+		function getFrame(index:int):*;
 		
 	}
 	

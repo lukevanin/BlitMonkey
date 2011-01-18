@@ -15,7 +15,7 @@ package engine.graphics.views
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class MapView implements IGraphicView
+	public class TilesetMapView implements IGraphicView
 	{
 		
 		private var _model:IMapModel;
@@ -31,7 +31,7 @@ package engine.graphics.views
 		
 		
 		
-		public function MapView(model:IMapModel, tileset:ITileset) 
+		public function TilesetMapView(model:IMapModel, tileset:ITileset) 
 		{
 			this._model = model;
 			

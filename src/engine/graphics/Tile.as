@@ -4,6 +4,7 @@ package engine.graphics
 	import engine.graphics.interfaces.IRenderContext;
 	import engine.graphics.interfaces.ITile;
 	import flash.display.BitmapData;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	/**
@@ -16,6 +17,12 @@ package engine.graphics
 		private var _bitmapData:BitmapData;
 		
 		private var _area:Rectangle;
+		
+		
+		public function get size():Point
+		{
+			return new Point(this._area.width, this._area.height);
+		}
 		
 		
 		public function Tile(bitmapData:BitmapData, area:Rectangle) 

@@ -13,24 +13,27 @@ package engine.graphics.builders
 	import engine.graphics.interfaces.IMapController;
 	import engine.graphics.interfaces.IMapModel;
 	import engine.graphics.models.MapModel;
-	import engine.graphics.views.MapView;
+	import engine.graphics.views.TilesetMapView;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class MapBuilder 
+	public class TilesetMapBuilder 
 	{
 		
-		public function MapBuilder() 
+		private var _tileset:ITileset;
+		
+		
+		public function TilesetMapBuilder(tileset:ITileset) 
 		{
-			
+			this._tileset = tileset;
 		}
 		
 		
 		
-		public function buildMap(grid:IGrid, tileset:ITileset, displaySize:Point, gridSize:Point, offset:Point = null, transform:ITransform = null):IMap
+		public function buildMap(grid:IGrid, displaySize:Point, gridSize:Point, offset:Point = null, transform:ITransform = null):IMap
 		{
 			if (offset == null)
 				offset = new Point();
@@ -40,7 +43,7 @@ package engine.graphics.builders
 			
 			var model:IMapModel = new MapModel(grid, offset, gridSize, displaySize, transform);
 			
-			var view:IGraphicView = new MapView(model, tileset);
+			var view:IGraphicView = new TilesetMapView(model, this._tileset);
 			
 			var controller:IMapController = new MapController(model);
 			

@@ -1,6 +1,7 @@
 package engine.graphics.views 
 {
 	import engine.common.interfaces.ICollection;
+	import engine.common.interfaces.ITileset;
 	import engine.graphics.interfaces.IAnimationModel;
 	import engine.graphics.interfaces.IGraphic;
 	import engine.graphics.interfaces.IGraphicView;
@@ -11,23 +12,27 @@ package engine.graphics.views
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class AnimationView implements IGraphicView
+	public class TilesetAnimationView implements IGraphicView
 	{
 		
 		private var _model:IAnimationModel;
+		
+		private var _tileset:ITileset;
 		
 		
 		
 		public function get size():Point 
 		{
-			return this.getCurrentFrame().size;
+			return this._tileset.getSize(this.getCurrentIndex());
 		}
 		
 		
 		
-		public function AnimationView(model:IAnimationModel) 
+		public function TilesetAnimationView(model:IAnimationModel, tileset:ITileset) 
 		{
 			this._model = model;
+			
+			this._tileset = tileset;
 		}
 		
 
@@ -35,15 +40,21 @@ package engine.graphics.views
 		
 		public function draw(renderContext:IRenderContext):void 
 		{
-			this.getCurrentFrame().draw(renderContext);
+			this._tileset.draw(renderContext, this._model.transform, this.getCurrentIndex());
 		}
 
 		
+		
+		private function getCurrentIndex():int
+		{
+			return this._model.getFrame(this._model.currentFrame);
+		}
+		
 			
-		private function getCurrentFrame():IGraphicView
+		/*private function getCurrentFrame():IGraphicView
 		{
 			return (this._model.getItemAt(this._model.currentFrame) as IGraphic);
-		}
+		}*/
 		
 	}
 

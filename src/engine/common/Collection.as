@@ -37,6 +37,30 @@ package engine.common
 			return this._items.splice(index, 1)[0];
 		}
 		
+		
+		
+		
+		public function clone():ICollection
+		{
+			var collection:ICollection = new Collection();
+			
+			for (var i:int = 0; i < this.numItems; i++)
+				collection.addItem(this.getItemAt(i));
+				
+			return collection;
+		}
+		
+		
+		public static function fromArray(a:Array):ICollection
+		{
+			var collection:ICollection = new Collection();
+			
+			for (var i:int = 0; i < a.length; i++)
+				collection.addItem(a[i]);
+				
+			return collection;
+		}
+		
 	}
 
 }

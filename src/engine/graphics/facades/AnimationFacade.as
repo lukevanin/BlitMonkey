@@ -36,7 +36,7 @@ package engine.graphics.facades
 		
 		public function get numFrames():int 
 		{
-			return this._model.numItems;
+			return this._model.numFrames;
 		}
 		
 		
@@ -48,20 +48,20 @@ package engine.graphics.facades
 		
 		public function get size():Point
 		{
-			return (this._model.getItemAt(this.currentFrame) as IAnimationFrame).size;
+			return this._view.size;
 		}
 		
 		
 		
-		public function get position():Point
+		/*public function get position():Point
 		{
 			return this._model.position;
-		}
+		}*/
 		
-		public function set position(position:Point):void
+		/*public function set position(position:Point):void
 		{
 			this._model.position = position;
-		}
+		}*/
 		
 		
 		public function AnimationFacade(model:IAnimationModel, view:IGraphicView, controller:IAnimationController) 
@@ -75,13 +75,6 @@ package engine.graphics.facades
 		
 		
 
-		
-		/*public function getFrameAt(index:int):IAnimationFrame 
-		{
-			return this._model.getFrameAt(index);
-		}*/
-		
-		
 		
 		public function play():void
 		{
