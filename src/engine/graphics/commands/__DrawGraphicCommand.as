@@ -1,7 +1,6 @@
 package engine.graphics.commands 
 {
 	import engine.common.interfaces.ICommand;
-	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IGraphic;
 	import engine.graphics.interfaces.IRenderContext;
 	import flash.geom.Point;
@@ -9,31 +8,31 @@ package engine.graphics.commands
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class DrawGraphicCommand implements ICommand 
+	public class __DrawGraphicCommand implements ICommand 
 	{
 		
 		private var _graphic:IGraphic;
 		
 		private var _renderContext:IRenderContext;
 		
-		private var _transform:ITransform;
+		private var _position:Point;
 		
 		
 		
-		public function DrawGraphicCommand(graphic:IGraphic, renderContext:IRenderContext, transform:ITransform) 
+		public function DrawGraphicCommand(graphic:IGraphic, renderContext:IRenderContext, position:Point) 
 		{
 			this._graphic = graphic;
 			
 			this._renderContext = renderContext;
 			
-			this._transform = transform;
+			this._position = position;
 		}
 		
 		
 		
 		public function execute():void 
 		{
-			this._graphic.draw(this._renderContext, this._transform);
+			this._graphic.draw(this._renderContext, this._position);
 		}
 		
 	}

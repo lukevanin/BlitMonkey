@@ -1,8 +1,8 @@
 package engine.framework.commands 
 {
 	import engine.common.interfaces.ICommand;
+	import engine.common.interfaces.ITimeline;
 	import engine.common.utils.TimeUtil;
-	import engine.framework.interfaces.ITimeline;
 	/**
 	 * ...
 	 * @author Luke Van In

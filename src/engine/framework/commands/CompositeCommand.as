@@ -1,7 +1,7 @@
 package engine.framework.commands 
 {
 	import engine.common.interfaces.ICommand;
-	import engine.framework.interfaces.ICompositeCommand;
+	import engine.common.interfaces.ICompositeCommand;
 	
 	/**
 	 * ...

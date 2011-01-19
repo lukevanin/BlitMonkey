@@ -8,7 +8,7 @@ package engine.graphics.controllers
 	 * ...
 	 * @author Luke Van In
 	 */
-	public class CompositeGraphicController implements IGraphic 
+	public class __CompositeGraphicController implements IGraphic 
 	{
 		
 		private var _graphics:Vector.<IGraphic>;
@@ -22,17 +22,17 @@ package engine.graphics.controllers
 		
 		
 
-		public function draw(renderContext:IRenderContext, position:Point):void 
+		public function draw(renderContext:IRenderContext):void 
 		{
-			this.drawGraphics(this._graphics, renderContext, position);
+			this.drawGraphics(this._graphics, renderContext);
 		}
 		
 		
 		
-		private function drawGraphics(graphics:Vector.<IGraphic>, renderContext:IRenderContext, position:Point):void
+		private function drawGraphics(graphics:Vector.<IGraphic>, renderContext:IRenderContext):void
 		{
 			for (var i:int = 0; i < graphics.length; i++)
-				graphics[i].draw(renderContext, position);
+				graphics[i].draw(renderContext);
 		}
 		
 	}

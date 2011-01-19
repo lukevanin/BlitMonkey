@@ -37,7 +37,8 @@ package engine.common
 			
 			this._numItems = 0;
 			
-			this._keyIndex = new flash.utils.Dictionary();
+			//this._keyIndex = new flash.utils.Dictionary();
+			this.buildKeyIndex();
 		}
 		
 		
@@ -91,7 +92,8 @@ package engine.common
 				
 			var index:int = this._keyIndex[key];
 			
-			delete this._keyIndex[key];
+			//delete this._keyIndex[key];
+			
 			
 			var value:Object = this._values[index];
 			
@@ -101,9 +103,37 @@ package engine.common
 			
 			this._numItems --;
 			
+			this.buildKeyIndex(); // TODO: optimise
+			
 			return value;
 		}
 		
+		
+		
+		private function buildKeyIndex():void
+		{
+			this._keyIndex = new flash.utils.Dictionary();
+			
+			for (var i:int = 0; i < this._numItems; i++)
+				this._keyIndex[this._keys[i]] = i;
+		}
+		
+		
+		
+		public function clone():IDictionary
+		{
+			var d:IDictionary = new Dictionary()
+			
+			var i:IIterator = this.getIterator();
+			
+			while (i.hasNext)
+			{
+				d.addItem(i.key, i.value);
+				i.next();
+			}
+			
+			return d;
+		}
 		
 		
 		public function getIterator():IIterator

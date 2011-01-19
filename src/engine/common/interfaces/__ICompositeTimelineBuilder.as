@@ -1,11 +1,11 @@
-package engine.framework.interfaces 
+package engine.common.interfaces 
 {
 	
 	/**
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface ICompositeTimelineBuilder 
+	public interface __ICompositeTimelineBuilder 
 	{
 		
 		function buildTimeline(timelines:Vector.<ITimeline>):ICompositeTimeline;

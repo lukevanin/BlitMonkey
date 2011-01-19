@@ -1,8 +1,7 @@
-package engine.framework.controllers 
+package engine.common.controllers 
 {
 	import engine.common.interfaces.IDictionary;
-	import engine.framework.interfaces.ICompositeTimeline;
-	import engine.framework.interfaces.ITimeline;
+	import engine.common.interfaces.ITimeline;
 	/**
 	 * ...
 	 * @author Luke Van In

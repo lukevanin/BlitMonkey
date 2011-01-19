@@ -15,6 +15,13 @@ package engine.geometry.interfaces
 		function set position(position:Point):void;
 		
 		
+		
+		function translate(p:Point):void;
+		
+		
+		function append(t:ITransform):ITransform;
+		
+		
 		function clone():ITransform;
 		
 	}

@@ -6,7 +6,7 @@ package engine.common.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IDictionary extends ICollection
+	public interface IDictionary
 	{
 		
 		function hasItem(key:*):Boolean;
@@ -18,6 +18,9 @@ package engine.common.interfaces
 		function addItem(key:*, value:*):void;
 		
 		function removeItem(key:*):*;
+		
+		
+		function clone():IDictionary;
 		
 	}
 	

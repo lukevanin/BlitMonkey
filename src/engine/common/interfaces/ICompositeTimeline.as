@@ -1,5 +1,6 @@
-package engine.framework.interfaces 
+package engine.common.interfaces 
 {
+	import engine.common.interfaces.ITimeline;
 	
 	/**
 	 * ...

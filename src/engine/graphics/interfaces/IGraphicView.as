@@ -1,7 +1,9 @@
 package engine.graphics.interfaces 
 {
 	import engine.framework.interfaces.IView;
+	import engine.geometry.interfaces.ITransform;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	/**
 	 * ...
@@ -10,10 +12,10 @@ package engine.graphics.interfaces
 	public interface IGraphicView extends IView
 	{
 		
-		function get size():Point;
+		function get area():Rectangle;
 		
 		
-		function draw(renderContext:IRenderContext):void;
+		function draw(renderContext:IRenderContext, transform:ITransform):void;
 		
 	}
 	

@@ -3,6 +3,7 @@ package engine.common.interfaces
 	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IRenderContext;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	/**
 	 * ...

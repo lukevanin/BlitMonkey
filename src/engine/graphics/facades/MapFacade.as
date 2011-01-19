@@ -37,10 +37,17 @@ package engine.graphics.facades
 		
 		
 		
-		public function get size():Point
+		public function get area():Rectangle
 		{
-			return this._view.size;
+			return this._view.area;
 		}
+		
+		
+		public function get transform():ITransform
+		{
+			return this._model.transform;
+		}
+		
 		
 		
 		public function MapFacade(model:IMapModel, view:IGraphicView, controller:IMapController) 
@@ -80,9 +87,9 @@ package engine.graphics.facades
 		}
 		
 		
-		public function draw(renderContext:IRenderContext):void
+		public function draw(renderContext:IRenderContext, transform:ITransform):void
 		{
-			this._view.draw(renderContext);
+			this._view.draw(renderContext, transform);
 		}
 		
 		

@@ -34,7 +34,25 @@ package engine.geometry
 				this._position = position.clone();
 		}
 		
+		
+		
+		public function translate(p:Point):void
+		{
+			this._position.x += p.x;
+			this._position.y += p.y;
+		}
+		
 
+		
+		public function append(t:ITransform):ITransform
+		{
+			var o:ITransform = this.clone();
+			
+			o.translate(t.position);
+			
+			return o;
+		}
+		
 		
 		public function clone():ITransform 
 		{

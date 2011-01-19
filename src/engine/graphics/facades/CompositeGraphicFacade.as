@@ -1,9 +1,13 @@
 package engine.graphics.facades 
 {
+	import engine.geometry.interfaces.ITransform;
+	import engine.graphics.interfaces.ICompositeGraphicModel;
+	import engine.graphics.interfaces.IGraphicView;
 	import flash.geom.Point;
 	import engine.graphics.interfaces.ICompositeGraphic;
 	import engine.graphics.interfaces.IGraphic;
 	import engine.graphics.interfaces.IRenderContext;
+	import flash.geom.Rectangle;
 	
 	/**
 	 * ...
@@ -11,44 +15,59 @@ package engine.graphics.facades
 	 */
 	public class CompositeGraphicFacade implements ICompositeGraphic 
 	{
-		private var _graphics:Vector.<IGraphic>;
+		private var _model:ICompositeGraphicModel;
 		
-		private var _controller:IGraphic;
+		private var _view:IGraphicView;
 		
+				
 		
 		public function get numGraphics():int 
 		{
-			return this._graphics.length;
+			return this._model.numGraphics;
 		}
+		
+		
+		
+		public function get area():Rectangle
+		{
+			return this._view.area;
+		}
+		
+		
+		public function get transform():ITransform
+		{
+			return this._model.transform;
+		}
+		
 
 		
-		public function CompositeGraphicFacade(graphics:Vector.<IGraphic>, controller:IGraphic) 
+		public function CompositeGraphicFacade(model:ICompositeGraphicModel, view:IGraphicView) 
 		{
-			this._graphics = graphics;
+			this._model = model;
 			
-			this._controller = controller;
+			this._view = view;
 		}
 
 		
 		public function addGraphic(graphic:IGraphic):void 
 		{
-			this._graphics.push(graphic);
+			this._model.addGraphic(graphic);
 		}
 		
 		public function getGraphicAt(index:int):IGraphic 
 		{
-			return this._graphics[index];
+			return this._model.getGraphicAt(index);
 		}
 		
 		public function removeGraphicAt(index:int):IGraphic 
 		{
-			return this._graphics.splice(index, 1)[0];
+			return this._model.removeGraphicAt(index);
 		}
 		
 
-		public function draw(renderContext:IRenderContext, position:Point):void 
+		public function draw(renderContext:IRenderContext, transform:ITransform):void 
 		{
-			this._controller.draw(renderContext, position);
+			this._view.draw(renderContext, transform);
 		}
 		
 	}

@@ -1,8 +1,8 @@
-package engine.framework.facades 
+package engine.common.facades 
 {
+	import engine.common.interfaces.ICompositeTimeline;
 	import engine.common.interfaces.IDictionary;
-	import engine.framework.interfaces.ICompositeTimeline;
-	import engine.framework.interfaces.ITimeline;
+	import engine.common.interfaces.ITimeline;
 	/**
 	 * ...
 	 * @author Luke Van In

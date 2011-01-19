@@ -2,15 +2,27 @@ package demo.builders
 {
 	import demo.facades.GameFacade;
 	import demo.libraries.GameLib;
+	import engine.common.builders.CompositeTimelineBuilder;
 	import engine.common.Collection;
 	import engine.common.Grid;
 	import engine.common.interfaces.ICollection;
+	import engine.common.interfaces.ICommand;
+	import engine.common.interfaces.ICompositeCommand;
+	import engine.common.interfaces.ICompositeTimeline;
 	import engine.common.interfaces.IGrid;
 	import engine.common.interfaces.ITileset;
+	import engine.common.interfaces.ITimeline;
 	import engine.common.utils.BitmapUtil;
 	import engine.common.utils.TimeUtil;
+	import engine.framework.commands.CallbackCommand;
+	import engine.framework.commands.CompositeCommand;
+	import engine.framework.commands.EventCommand;
+	import engine.framework.commands.UpdateTimelineCommand;
 	import engine.framework.interfaces.IGame;
 	import engine.framework.interfaces.IGameBuilder;
+	import engine.geometry.commands.TranslateCommand;
+	import engine.geometry.Transform;
+	import engine.graphics.builders.CompositeGraphicBuilder;
 	import engine.graphics.builders.TilesetAnimationBuilder;
 	import engine.graphics.builders.BitmapBuilder;
 	import engine.graphics.builders.CanvasBuilder;
@@ -18,6 +30,7 @@ package demo.builders
 	import engine.graphics.builders.IndexableGraphicAnimationBuilder;
 	import engine.graphics.builders.TilesetMapBuilder;
 	import engine.graphics.builders.TilesetBuilder;
+	import engine.graphics.commands.DrawGraphicCommand;
 	import engine.graphics.contexts.CanvasRenderContext;
 	import engine.graphics.facades.IndexableGraphicAnimationFrameFacade;
 	import engine.graphics.interfaces.IAnimation;
@@ -25,9 +38,14 @@ package demo.builders
 	import engine.graphics.interfaces.ICanvas;
 	import engine.graphics.interfaces.ICanvasBuilder;
 	import engine.graphics.interfaces.ICellBitmapBuilder;
+	import engine.graphics.interfaces.ICompositeGraphic;
 	import engine.graphics.interfaces.IIndexableGraphic;
 	import engine.graphics.interfaces.IMap;
 	import engine.graphics.interfaces.IRenderContext;
+	import engine.input.builders.KeyboardBuilder;
+	import engine.input.commands.KeyCommand;
+	import engine.input.controllers.KeyboardController;
+	import engine.input.interfaces.IKeyboard;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -35,6 +53,7 @@ package demo.builders
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.ui.Keyboard;
 
 
 
@@ -164,7 +183,7 @@ package demo.builders
 			
 			//walkSouthAnimation.position = new Point(40, 0);
 			
-			walkSouthAnimation.play();
+			/*
 			
 			this._container.addEventListener(Event.ENTER_FRAME, function(e:Event):void { 
 					//map.offset = new Point(map.offset + 1, 0);
@@ -181,9 +200,62 @@ package demo.builders
 					//walkNorthAnimation.position = new Point(walkNorthAnimation.position.x, walkNorthAnimation.position.y - 1);
 					//walkNorthAnimation.update(TimeUtil.getSeconds()); 
 					//walkNorthAnimation.draw(renderContext); 
-				} );
+				} );*/
+			
+				
+			walkSouthAnimation.play();
 			
 			this._container.addChild(canvas as DisplayObject);
+			
+			var keyboard:IKeyboard = new KeyboardBuilder().buildKeyboard(this._container.stage);
+			
+			
+			var timelines:ICompositeTimeline = new CompositeTimelineBuilder().buildTimeline();
+			
+			timelines.addTimeline(walkSouthAnimation);
+			
+			
+			var graphics:ICompositeGraphic = new CompositeGraphicBuilder().buildGraphic();
+			
+			graphics.addGraphic(map);
+			
+			graphics.addGraphic(walkSouthAnimation);
+			
+			
+			
+			var inputs:ICompositeCommand = new CompositeCommand(new Vector.<ICommand>());
+			
+			inputs.addCommand(new KeyCommand(keyboard, Keyboard.UP, new CallbackCommand(map.offsetBy, new Point(0, -1))));
+			
+			inputs.addCommand(new KeyCommand(keyboard, Keyboard.DOWN, new CallbackCommand(map.offsetBy, new Point(0, 1))));
+			
+			inputs.addCommand(new KeyCommand(keyboard, Keyboard.RIGHT, new CallbackCommand(map.offsetBy, new Point(1, 0))));
+			
+			inputs.addCommand(new KeyCommand(keyboard, Keyboard.LEFT, new CallbackCommand(map.offsetBy, new Point(-1, 0))));
+						
+				
+			var updates:ICompositeCommand = new CompositeCommand(new Vector.<ICommand>());
+			
+			updates.addCommand(new CallbackCommand(canvas.clear));
+			
+			updates.addCommand(new UpdateTimelineCommand(timelines));
+
+			updates.addCommand(inputs);
+			
+			updates.addCommand(new DrawGraphicCommand(graphics, renderContext, new Transform()));
+			
+			
+			
+			//updates.execute();
+			
+			
+			
+			var loop:ICommand = new EventCommand(this._container, Event.ENTER_FRAME, updates);
+
+			loop.execute();
+			
+			
+			
 			
 			return new GameFacade(null);
 			

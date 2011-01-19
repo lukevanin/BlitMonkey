@@ -1,8 +1,8 @@
 package engine.framework.commands 
 {
 	import engine.common.interfaces.ICommand;
+	import engine.common.interfaces.IDisposable;
 	import engine.common.interfaces.IStoppableCommand;
-	import engine.framework.interfaces.IDisposable;
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	/**

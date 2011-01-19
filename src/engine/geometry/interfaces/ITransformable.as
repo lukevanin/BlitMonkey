@@ -1,5 +1,6 @@
 package engine.geometry.interfaces 
 {
+	import flash.geom.Point;
 	
 	/**
 	 * ...
@@ -9,6 +10,9 @@ package engine.geometry.interfaces
 	{
 		
 		function get transform():ITransform;
+		
+		
+		//function translate(p:Point):void;
 		
 	}
 	

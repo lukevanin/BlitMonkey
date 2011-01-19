@@ -1,5 +1,6 @@
 package engine.graphics.facades 
 {
+	import engine.geometry.interfaces.ITransform;
 	import engine.graphics.interfaces.IAnimation;
 	import engine.graphics.interfaces.IAnimationController;
 	import engine.graphics.interfaces.IAnimationFrame;
@@ -8,6 +9,7 @@ package engine.graphics.facades
 	import engine.graphics.interfaces.IIndexableGraphic;
 	import engine.graphics.interfaces.IRenderContext;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Luke Van In
@@ -46,11 +48,16 @@ package engine.graphics.facades
 		}
 		
 		
-		public function get size():Point
+		public function get area():Rectangle
 		{
-			return this._view.size;
+			return this._view.area;
 		}
 		
+		
+		public function get transform():ITransform
+		{
+			return this._model.transform;
+		}
 		
 		
 		/*public function get position():Point
@@ -92,12 +99,11 @@ package engine.graphics.facades
 		{
 			this._controller.update(t);
 		}
+			
 		
-		
-		
-		public function draw(renderContext:IRenderContext):void
+		public function draw(renderContext:IRenderContext, transform:ITransform):void
 		{
-			this._view.draw(renderContext);
+			this._view.draw(renderContext, transform);
 		}
 		
 

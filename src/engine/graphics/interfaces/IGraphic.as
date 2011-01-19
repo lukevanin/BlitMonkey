@@ -8,7 +8,7 @@ package engine.graphics.interfaces
 	 * ...
 	 * @author Luke Van In
 	 */
-	public interface IGraphic extends IGraphicView
+	public interface IGraphic extends ITransformable, IGraphicView
 	{
 		
 		
