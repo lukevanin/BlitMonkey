@@ -1,5 +1,87 @@
 BlitMonkey
 
+2011-01-19
+Finally getting the hang of stupid git. Seems to be a three-step process:
+#1. Add
+#2. Commit
+#3. Push
+
+By strictly following this order (from TortoiseGit) commits are relatively pain free. I don't see the practicality of stupid git in a production environment however, with the realtive fragility of the tools so far, the multi-step check-in procedure, and the requirement to type a password on each commit. SVN may have it's problems, but so far it beats stupid git hands down on intuitive usability.
+
+Ahem, on the game side, the engine is re-taking shape. Animations and maps based on tilsets have been implemented and don't cost the user too many brain cells to use, although the current approach may stray a bit to close towards being "hackish":
+
+// get a bitmap instance 
+var bitmapData:BitmapData = BitmapUtil.getBitmapData(new GameLib.TILE_PAVE());
+
+// create the tile set to describe how the bitmap is divided up
+var tileset:ITileset = new TilesetBuilder().buildTileset(bitmapData, new Point(40, 40));
+
+// to create an animation using the tileset (the Collection.fromArray() part seems a bit neanderthal)
+var walkNorthAnimation:IAnimation = new TilesetAnimationBuilder(tileset).buildAnimation(Collection.fromArray([4, 5]), 8);
+
+// to create a map based on the same tileset (again the fromArray() nonsense feels dirty like a ho)
+var mapGrid:IGrid = Grid.fromArray([
+		[10, 11, 11, 11, 12],
+		[20, 21, 21, 21, 22],
+		[30, 31, 31, 31, 32]
+	]);  			
+			
+var map:IMap = new TilesetMapBuilder(tileset).buildMap(mapGrid, new Point(70, 70), new Point(40, 40));
+
+
+
+The game loop is simply a series of composite commands calling simpler commands to update animations, scan for input, and paste stuff on the display:
+
+var keyboard:IKeyboard = new KeyboardBuilder().buildKeyboard(this._container.stage);
+			
+			
+var timelines:ICompositeTimeline = new CompositeTimelineBuilder().buildTimeline();
+
+timelines.addTimeline(someAnimation);
+
+
+var graphics:ICompositeGraphic = new CompositeGraphicBuilder().buildGraphic();
+
+graphics.addGraphic(map);
+
+graphics.addTimeline(someAnimation); // animation needs to be added to timeline and to graphics (2 lists seems useful but may be too unwieldy)
+
+
+
+var inputs:ICompositeCommand = new CompositeCommand(new Vector.<ICommand>());
+
+inputs.addCommand(new KeyCommand(keyboard, Keyboard.UP, new CallbackCommand(map.offsetBy, new Point(0, -1))));
+
+inputs.addCommand(new KeyCommand(keyboard, Keyboard.DOWN, new CallbackCommand(map.offsetBy, new Point(0, 1))));
+
+inputs.addCommand(new KeyCommand(keyboard, Keyboard.RIGHT, new CallbackCommand(map.offsetBy, new Point(1, 0))));
+
+inputs.addCommand(new KeyCommand(keyboard, Keyboard.LEFT, new CallbackCommand(map.offsetBy, new Point(-1, 0))));
+			
+	
+var updates:ICompositeCommand = new CompositeCommand(new Vector.<ICommand>());
+
+updates.addCommand(new CallbackCommand(canvas.clear));
+
+updates.addCommand(new UpdateTimelineCommand(timelines));
+
+updates.addCommand(inputs);
+
+updates.addCommand(collisions);
+
+updates.addCommand(new DrawGraphicCommand(graphics, renderContext, new Transform()));
+
+
+var loop:ICommand = new EventCommand(this._container, Event.ENTER_FRAME, updates);
+
+loop.execute();
+
+
+Callback commands can be useful but they can also be abused and so should probably be eliminated.
+
+
+
+
 2011-01-12
 Sprite state is a command list (parallel by default), also extends general state (and composite state).
 
