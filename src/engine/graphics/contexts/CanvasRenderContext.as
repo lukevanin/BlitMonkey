@@ -17,6 +17,13 @@ package engine.graphics.contexts
 		private var _canvas:ICanvas;
 		
 		
+
+		public function get area():Rectangle 
+		{
+			return this._canvas.area;
+		}
+		
+		
 		
 		public function CanvasRenderContext(canvas:ICanvas) 
 		{
@@ -30,9 +37,17 @@ package engine.graphics.contexts
 			this._canvas.bitmapData.copyPixels(bitmap, sourceArea, destinationPoint, null, null, true);
 		}*/
 		
-		public function blit(bitmap:BitmapData, sourceArea:Rectangle, transform:ITransform):void 
+		public function blit(bitmapData:BitmapData, sourceArea:Rectangle, transform:ITransform):void 
 		{
-			this._canvas.bitmapData.copyPixels(bitmap, sourceArea, transform.position, null, null, true);
+			this._canvas.bitmapData.copyPixels(bitmapData, sourceArea, transform.position, null, null, true);
+		}
+		
+
+		
+		
+		public function draw(renderContext:IRenderContext, area:Rectangle, transform:ITransform):void 
+		{
+			renderContext.blit(this._canvas.bitmapData, area, transform);
 		}
 		
 		

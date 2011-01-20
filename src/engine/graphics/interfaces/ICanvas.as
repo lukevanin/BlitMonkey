@@ -1,5 +1,6 @@
 package engine.graphics.interfaces 
 {
+	import engine.geometry.interfaces.ITransform;
 	import flash.display.BitmapData;
 	import flash.display.PixelSnapping;
 	import flash.geom.Point;
@@ -28,6 +29,9 @@ package engine.graphics.interfaces
 		function get height():Number;
 		
 		
+		function get area():Rectangle;
+		
+		
 		function get isTransparent():Boolean;
 		
 		function get backgroundColour():uint;
@@ -45,6 +49,10 @@ package engine.graphics.interfaces
 		
 		function set smoothing(smoothing:Boolean):void;
 		
+		
+		
+		
+		//function blit(bitmapData:BitmapData, sourceArea:Rectangle, transform:ITransform):void
 		
 		
 		function clear():void;

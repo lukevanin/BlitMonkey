@@ -1,6 +1,7 @@
 package engine.geometry.utils 
 {
 	import engine.geometry.interfaces.ITransform;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	/**
 	 * ...
@@ -31,6 +32,13 @@ package engine.geometry.utils
 			o.height = r.height;
 			
 			return o;
+		}
+		
+		
+		
+		public static function transformPoint(p:Point, t:ITransform):Point
+		{
+			return new Point(p.x + t.position.x, p.y + t.position.y);
 		}
 		
 	}

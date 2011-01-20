@@ -149,12 +149,20 @@ package demo.builders
 			
 
 			var mapGrid:IGrid = Grid.fromArray([
-					[10, 11, 11, 11, 12],
-					[20, 21, 21, 21, 22],
-					[30, 31, 31, 31, 32]
+					[10, 11, 11, 11, 11, 11, 11, 11, 12, 10, 11, 11, 11, 12],
+					[20, 21, 21, 21, 21, 21, 21, 21, 22, 20, 21, 21, 21, 22],
+					[20, 21, 21, 21, 21, 21, 21, 21, 22, 20, 21, 21, 21, 22],
+					[20, 21, 21, 21, 21, 21, 21, 21, 22, 20, 21, 21, 21, 22],
+					[30, 31, 31, 31, 31, 31, 31, 31, 32, 30, 31, 31, 31, 32],
+					[10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12],
+					[20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22],
+					[20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22],
+					[20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22],
+					[20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22],
+					[30, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 32]
 				]);  			
 						
-			var map:IMap = new TilesetMapBuilder(paveTileset).buildMap(mapGrid, new Point(70, 70), new Point(40, 40));
+			var map:IMap = new TilesetMapBuilder(paveTileset).buildMap(mapGrid, new Point(stageArea.width, stageArea.height), new Point(40, 40), new Point(80, 150));
 			
 			
 			var canvasBuilder:ICanvasBuilder = new CanvasBuilder();

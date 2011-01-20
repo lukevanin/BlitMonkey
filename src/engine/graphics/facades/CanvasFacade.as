@@ -5,6 +5,7 @@ package engine.graphics.facades
 	import flash.display.PixelSnapping;
 	import engine.graphics.interfaces.ICanvas;
 	import flash.display.BitmapData;
+	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Luke Van In
@@ -85,6 +86,13 @@ package engine.graphics.facades
 		
 		
 		
+		
+		public function get area():Rectangle
+		{
+			return new Rectangle(this.x, this.y, this.width, this.height);
+		}
+		
+		
 		public function CanvasFacade(bitmapData:BitmapData, pixelSnapping:String, smoothing:Boolean, model:CanvasModel) 
 		{
 			super(bitmapData, pixelSnapping, smoothing);
@@ -93,6 +101,8 @@ package engine.graphics.facades
 		}
 		
 		
+		
+	
 		
 		public function clear():void
 		{

@@ -17,6 +17,10 @@ package engine.common.interfaces
 		
 		function getItem(column:int, row:int):*;
 		
+		
+		//function get indexChangeSignal():ISignal;
+		
+		
 		function clone():IGrid;
 		
 	}

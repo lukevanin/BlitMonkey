@@ -1,6 +1,7 @@
 package engine.graphics.interfaces 
 {
 	import engine.common.interfaces.IGrid;
+	import engine.common.interfaces.ISignal;
 	import engine.geometry.interfaces.ITransform;
 	import engine.geometry.interfaces.ITransformable;
 	import flash.geom.Point;
@@ -21,8 +22,9 @@ package engine.graphics.interfaces
 		function set gridSize(gridSize:Point):void;
 		
 		function get gridSize():Point;
-				
 		
+		
+
 		function set displaySize(displaySize:Point):void
 		
 		function get displaySize():Point;
@@ -35,6 +37,15 @@ package engine.graphics.interfaces
 		
 		function get transform():ITransform; // where the map is drawn on the screen
 		
+		
+		//function get indexChangeSignal():ISignal;
+		
+		
+		//function setFlagged(x:int, y:int):void;
+		
+		//function unsetFlagged(x:int, y:int):void;
+		
+		//function getFlagged():Vector.<Point>;
 		
 		
 		function setIndex(x:int, y:int, index:int):void;

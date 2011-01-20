@@ -1,5 +1,6 @@
 package engine.graphics.controllers 
 {
+	import engine.geometry.Transform;
 	import engine.graphics.interfaces.IMapController;
 	import engine.graphics.interfaces.IMapModel;
 	import flash.geom.Point;
@@ -22,6 +23,7 @@ package engine.graphics.controllers
 		public function offsetBy(p:Point):void 
 		{
 			this._model.offset = this._model.offset.add(p);
+			//this._model.offset.translate(p);
 		}
 		
 		
@@ -30,6 +32,7 @@ package engine.graphics.controllers
 			this._model.offset = p;
 		}
 		
+				
 	}
 
 }

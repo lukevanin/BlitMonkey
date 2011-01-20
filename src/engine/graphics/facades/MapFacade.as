@@ -8,6 +8,7 @@ package engine.graphics.facades
 	import engine.graphics.interfaces.IMap;
 	import engine.graphics.interfaces.IMapController;
 	import engine.graphics.interfaces.IMapModel;
+	import engine.graphics.interfaces.IMapView;
 	import engine.graphics.interfaces.IRenderContext;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -19,7 +20,7 @@ package engine.graphics.facades
 	{
 		private var _model:IMapModel;
 		
-		private var _view:IGraphicView;
+		private var _view:IMapView;
 		
 		private var _controller:IMapController;		
 		
@@ -50,7 +51,7 @@ package engine.graphics.facades
 		
 		
 		
-		public function MapFacade(model:IMapModel, view:IGraphicView, controller:IMapController) 
+		public function MapFacade(model:IMapModel, view:IMapView, controller:IMapController) 
 		{
 			this._model = model;
 			
@@ -79,7 +80,10 @@ package engine.graphics.facades
 		public function setIndex(x:int, y:int, index:int):void 
 		{
 			this._model.setIndex(x, y, index);
+			
+			this._view.invalidateAt(x, y);
 		}
+		
 		
 		public function getIndex(x:int, y:int):int 
 		{
